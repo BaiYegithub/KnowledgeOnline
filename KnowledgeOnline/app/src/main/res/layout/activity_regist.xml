@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    tools:context=".login.RegistActivity">
+
+    <heqi.online.com.view.TitleBar
+        android:id="@+id/titleBarAcRegist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:id="@+id/rlv_acRegist"
+        style="@style/roundbg"
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp">
+
+
+        <heqi.online.com.view.ClearEditText
+            android:id="@+id/et_phoneNum_acRegist"
+            style="@style/editText"
+            android:layout_marginTop="24dp"
+            android:drawableLeft="@drawable/phonenum_icon"
+            android:hint="@string/input_phone"
+             />
+
+
+        <RelativeLayout
+            android:id="@+id/rlv_et_pass_acRegist"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_below="@id/et_phoneNum_acRegist"
+            android:layout_marginLeft="21dp"
+            android:layout_marginRight="21dp"
+            android:layout_marginTop="24dp">
+
+            <EditText
+                android:id="@+id/et_pass_acRegist"
+                style="@style/editText"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:drawableLeft="@drawable/password_icon"
+                android:hint="@string/input_pass"
+                android:inputType="textPassword" />
+
+            <ImageView
+                android:id="@+id/iv_eye_acRegist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:paddingBottom="16dp"
+                android:paddingRight="11dp"
+                android:src="@drawable/close_eye" />
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/bt_regist_acRegist"
+            style="@style/bt_login"
+            android:layout_below="@id/rlv_et_pass_acRegist"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:text="注册" />
+
+
+
+    </RelativeLayout>
+</RelativeLayout>

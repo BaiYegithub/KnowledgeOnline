@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 字体大小-->
+    <dimen name="textSize_nine">9sp</dimen>
+    <dimen name="textSize_ten">10sp</dimen>
+    <dimen name="textSize_eleven">11sp</dimen>
+    <dimen name="textSize_twelve">12sp</dimen>
+    <dimen name="textSize_thirteen">13sp</dimen>
+    <dimen name="textSize_fourteen">14sp</dimen>
+    <dimen name="textSize_fifteen">15sp</dimen>
+    <dimen name="textSize_sixteen">16sp</dimen>
+    <dimen name="textSize_seventeen">17sp</dimen>
+    <dimen name="textSize_eighteen">18sp</dimen>
+    <dimen name="textSize_nineteen">19sp</dimen>
+    <dimen name="textSize_twenty">20sp</dimen>
+    <dimen name="textSize_twenty_one">21sp</dimen>
+    <dimen name="textSize_twenty_two">22sp</dimen>
+    <dimen name="textSize_twenty_three">23sp</dimen>
+    <dimen name="textSize_twenty_four">24sp</dimen>
+    <dimen name="textSize_twenty_five">25sp</dimen>
+    <dimen name="textSize_fifty">50sp</dimen>
+
+
+    <dimen name="title_height">55dp</dimen>
+</resources>

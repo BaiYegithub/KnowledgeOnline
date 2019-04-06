@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    tools:context=".login.LoginActivity">
+
+    <heqi.online.com.view.TitleBar
+        android:id="@+id/titleBarAcLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <RelativeLayout
+        android:id="@+id/rlv_acLogin"
+        style="@style/roundbg"
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp">
+
+
+        <heqi.online.com.view.ClearEditText
+            android:id="@+id/et_phoneNum_acLogin"
+            style="@style/editText"
+            android:layout_marginTop="24dp"
+            android:drawableLeft="@drawable/phonenum_icon"
+            android:hint="@string/input_phone"
+            android:inputType="phone"
+            android:maxLength="11" />
+
+
+        <RelativeLayout
+            android:id="@+id/rlv_et_pass_acLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_below="@id/et_phoneNum_acLogin"
+            android:layout_marginLeft="21dp"
+            android:layout_marginRight="21dp"
+            android:layout_marginTop="24dp">
+
+            <EditText
+                android:id="@+id/et_pass_acLogin"
+                style="@style/editText"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:drawableLeft="@drawable/password_icon"
+                android:hint="@string/input_pass"
+                android:inputType="textPassword"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/iv_eye_acLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:paddingBottom="16dp"
+                android:paddingRight="11dp"
+                android:src="@drawable/close_eye" />
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/bt_login_acLogin"
+            style="@style/bt_login"
+            android:layout_below="@id/rlv_et_pass_acLogin"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:text="登录" />
+
+        <TextView
+            android:id="@+id/tv_forgetPass_acLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/bt_login_acLogin"
+            android:layout_marginBottom="24dp"
+            android:layout_marginRight="22dp"
+            android:text="忘记密码"
+            android:textColor="@color/colorMainText_select"
+            android:textSize="12sp" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

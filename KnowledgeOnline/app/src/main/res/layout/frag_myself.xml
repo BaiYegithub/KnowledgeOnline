@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@drawable/titlebarbg"
+        android:elevation="1dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="41dp"
+            android:background="@drawable/shape_bg_iv_head">
+
+            <heqi.online.com.view.CircleImageView
+                android:id="@+id/iv_head_fragMine"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:src="@drawable/headimg_default" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_name_fragMine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="69dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:id="@+id/rlv_credit_fragMine"
+                style="@style/roundbg"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="140dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="17dp"
+                    android:text="学分"
+                    android:textColor="@color/firstBlack"
+                    android:textSize="14sp" />
+
+                <!-- <TextView
+                     android:id="@+id/tv_credit_fragMine"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentRight="true"
+                     android:layout_centerVertical="true"
+                     android:layout_marginRight="17dp"
+                     android:text=""
+                     android:textColor="@color/orange"
+                     android:textSize="16sp"
+                     android:textStyle="bold"
+                     />-->
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_fragMine"
+                style="@style/roundbg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rlv_credit_fragMine"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="6dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_myDownLoad_fragMine"
+                    style="@style/mine_credit"
+                    android:text="我的下载" />
+
+                <View style="@style/xuxian" />
+
+                <TextView
+                    android:id="@+id/tv_collection_fragMine"
+                    style="@style/mine_credit"
+                    android:text="我的收藏" />
+
+                <View style="@style/xuxian" />
+
+                <TextView
+                    android:id="@+id/tv_myQa_fragMine"
+                    style="@style/mine_credit"
+                    android:text="我的问答" />
+
+                <View
+                    android:id="@+id/xuXian_mySpecialty_fragMine"
+                    style="@style/xuxian"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_set_fragMine"
+                style="@style/mine_credit"
+                android:layout_below="@id/ll_fragMine"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/layer_list_yinying"
+                android:elevation="1dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="19dp"
+                android:text="设置" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
