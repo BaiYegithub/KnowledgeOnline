@@ -55,7 +55,7 @@ public class RegistActivity extends BaseActivity implements ILogin {
 
     @Override
     protected void initHttp() {
-        loginPresenter = new LoginPresenter(this);
+        loginPresenter = new LoginPresenter(this,this);
     }
 
     @Override

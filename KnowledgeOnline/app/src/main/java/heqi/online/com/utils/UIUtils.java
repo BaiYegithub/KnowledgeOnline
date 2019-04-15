@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -12,6 +13,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -22,6 +25,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -207,7 +211,6 @@ public class UIUtils {
     }
 
 
-
     /**
      * @param a 原Float 类型的值
      * @param n 保留几位小数
@@ -334,7 +337,7 @@ public class UIUtils {
     /**
      * @param wbAcJiangYi webView 设置
      */
-    public static void webSettings(WebView wbAcJiangYi,String pdfUrl) {
+    public static void webSettings(WebView wbAcJiangYi, String pdfUrl) {
         WebSettings wbSettings = wbAcJiangYi.getSettings();
         wbSettings.setJavaScriptEnabled(true);
         wbSettings.setAllowFileAccess(true);
@@ -351,7 +354,56 @@ public class UIUtils {
         wbAcJiangYi.loadUrl(pdfUrl);
     }
 
+    /**
+     * 获取是否存在NavigationBar
+     *
+     * @param context
+     * @return
+     */
+    public static boolean checkDeviceHasNavigationBar() {
+        boolean hasNavigationBar = false;
+        Resources rs = UIUtils.getContext().getResources();
+        int id = rs.getIdentifier("config_showNavigationBar", "bool", "android");
+        if (id > 0) {
+            hasNavigationBar = rs.getBoolean(id);
+        }
+        try {
+            Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
+            Method m = systemPropertiesClass.getMethod("get", String.class);
+            String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
+            if ("1".equals(navBarOverride)) {
+                hasNavigationBar = false;
+            } else if ("0".equals(navBarOverride)) {
+                hasNavigationBar = true;
+            }
+        } catch (Exception e) {
+        }
+        return hasNavigationBar;
+    }
 
+    /**
+     * 获取虚拟功能键高度
+     *
+     * @param context
+     * @return
+     */
+    public static int getVirtualBarHeigh() {
+        int vh = 0;
+        WindowManager windowManager = (WindowManager) UIUtils.getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        try {
+            @SuppressWarnings("rawtypes")
+            Class c = Class.forName("android.view.Display");
+            @SuppressWarnings("unchecked")
+            Method method = c.getMethod("getRealMetrics", DisplayMetrics.class);
+            method.invoke(display, dm);
+            vh = dm.heightPixels - windowManager.getDefaultDisplay().getHeight();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return vh;
+    }
 
 
 }

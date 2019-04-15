@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              style="@style/roundbg"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_lint_dialogLint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="请输入链接地址"/>
+
+    <EditText
+        android:id="@+id/et_lintContent_dialogLint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="请输入链接内容"/>
+
+    <Button
+        android:id="@+id/bt_confirm_dialogLint"
+        style="@style/bt_login"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:text="确认"
+        />
+</LinearLayout>

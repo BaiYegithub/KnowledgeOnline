@@ -1,5 +1,7 @@
 package heqi.online.com.login.presenter;
 
+import android.arch.lifecycle.LifecycleOwner;
+
 import heqi.online.com.base.BaseAbstractPresenter;
 import heqi.online.com.base.BaseBean;
 import heqi.online.com.http.network.BaseApiServiceHelper;
@@ -12,8 +14,8 @@ import heqi.online.com.login.inter.ILogin;
 
 public class LoginPresenter extends BaseAbstractPresenter<ILogin> {
 
-    public LoginPresenter(ILogin mView) {
-        super(mView);
+    public LoginPresenter(ILogin mView, LifecycleOwner lifecycleOwner) {
+        super(mView,lifecycleOwner);
     }
 
     public void register(String userName,String password){

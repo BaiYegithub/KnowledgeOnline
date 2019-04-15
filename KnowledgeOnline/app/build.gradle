@@ -37,5 +37,9 @@ dependencies {
 
     //RecyclerView 下拉刷新 上拉加载框架
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
+    //lifecycle等生命周期控制管理架构组件
+    compile 'android.arch.lifecycle:extensions:1.0.0'
+    //引入富文本编辑器
+    compile 'jp.wasabeef:richeditor-android:1.2.2'
     testCompile 'junit:junit:4.12'
 }
