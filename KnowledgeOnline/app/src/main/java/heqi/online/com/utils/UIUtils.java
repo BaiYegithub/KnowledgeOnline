@@ -11,9 +11,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
@@ -33,6 +35,8 @@ import heqi.online.com.base.MyApplication;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+
+import static android.view.View.NO_ID;
 
 
 /**
@@ -357,7 +361,6 @@ public class UIUtils {
     /**
      * 获取是否存在NavigationBar
      *
-     * @param context
      * @return
      */
     public static boolean checkDeviceHasNavigationBar() {
@@ -381,10 +384,10 @@ public class UIUtils {
         return hasNavigationBar;
     }
 
+
     /**
      * 获取虚拟功能键高度
      *
-     * @param context
      * @return
      */
     public static int getVirtualBarHeigh() {
@@ -403,6 +406,24 @@ public class UIUtils {
             e.printStackTrace();
         }
         return vh;
+    }
+
+
+    private static final String NAVIGATION = "navigationBarBackground";
+
+    // 该方法需要在View完全被绘制出来之后调用，否则判断不了
+    //在比如 onWindowFocusChanged（）方法中可以得到正确的结果
+    public static boolean isNavigationBarExist(@NonNull Activity activity) {
+        ViewGroup vp = (ViewGroup) activity.getWindow().getDecorView();
+        if (vp != null) {
+            for (int i = 0; i < vp.getChildCount(); i++) {
+                vp.getChildAt(i).getContext().getPackageName();
+                if (vp.getChildAt(i).getId() != NO_ID && NAVIGATION.equals(activity.getResources().getResourceEntryName(vp.getChildAt(i).getId()))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 

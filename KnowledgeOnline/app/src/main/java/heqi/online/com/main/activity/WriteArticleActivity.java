@@ -154,7 +154,8 @@ public class WriteArticleActivity extends BaseActivity {
                 //此处就是用来获取键盘的高度的， 在键盘没有弹出的时候 此高度为0 键盘弹出的时候为一个正数
                 int heightDifference = screenHeight - r.bottom;
 
-                if (UIUtils.checkDeviceHasNavigationBar()) {
+                //全面屏会为true
+                if (UIUtils.isNavigationBarExist(WriteArticleActivity.this)) {
                     heightDifference -= UIUtils.getVirtualBarHeigh();
                 }
 
@@ -193,7 +194,9 @@ public class WriteArticleActivity extends BaseActivity {
 
         switch (view.getId()) {
             case R.id.iv_back_titlebar:
-                //BAI:2019/4/15 0015  是否需要提示
+                //BAI:2019/4/15 0015  是否需要提示  需要保存为草稿？
+
+                finish();
                 break;
             case R.id.tv_right_titlebar:
                 //发布按钮
