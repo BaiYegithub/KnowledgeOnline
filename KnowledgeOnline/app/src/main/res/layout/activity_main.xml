@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="heqi.online.com.MainActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="heqi.online.com.MainActivity">
 
     <heqi.online.com.view.NoScrollViewPager
         android:id="@+id/vp_mainac"
@@ -37,7 +37,7 @@
             android:id="@+id/main_study"
             style="@style/main_radio_style"
             android:drawableTop="@drawable/main_studypage_icon"
-            android:text="收藏"/>
+            android:text="公众号"/>
 
         <heqi.online.com.view.MainRadioButton
             android:id="@+id/main_user_self"

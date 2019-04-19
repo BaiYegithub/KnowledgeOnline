@@ -22,8 +22,11 @@
         <activity android:name=".login.LoginActivity">
         </activity>
         <activity android:name=".login.RegistActivity"/>
-        <activity android:name=".main.activity.WriteArticleActivity"
-                  android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        <activity
+            android:name=".main.activity.WriteArticleActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+        </activity>
+        <activity android:name=".main.activity.ArticleDetailActivity">
         </activity>
     </application>
 

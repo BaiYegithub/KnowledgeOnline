@@ -12,4 +12,5 @@
     <color name="fourGray">#DDDDDD</color>
     <color name="secBlack">#FF666666</color>
     <color name="firstBlack">#FF333333</color>
+    <color name="basic_background">#F6F6F6</color>
 </resources>

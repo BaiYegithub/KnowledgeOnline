@@ -24,6 +24,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    //noinspection GradleCompatible
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     //Retrofit2.0+Rxjava2.0+OkHttp3.0中使用的依赖：
@@ -35,6 +36,9 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'com.github.bumptech.glide:glide:4.1.1'
 
+    //引入 Material design 的依赖
+    compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
     //RecyclerView 下拉刷新 上拉加载框架
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
     //lifecycle等生命周期控制管理架构组件

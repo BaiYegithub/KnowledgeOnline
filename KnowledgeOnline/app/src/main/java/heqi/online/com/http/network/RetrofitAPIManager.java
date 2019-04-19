@@ -21,6 +21,8 @@ public class RetrofitAPIManager {
 
     private ApiService apiService;
 
+    private WanApiService wanApiService;
+
     public static RetrofitAPIManager getInstance() {
         if (retrofitAPIManager == null) {
             synchronized (RetrofitAPIManager.class) {
@@ -34,9 +36,13 @@ public class RetrofitAPIManager {
         return apiService;
     }
 
+    public WanApiService getWanApiService() {
+        return wanApiService;
+    }
 
     private RetrofitAPIManager() {//创建retrofit+okhttp
         apiService = setURLRetrofit(HttpUrlUtils.BASE_URL).create(ApiService.class);
+        wanApiService = setURLRetrofit(HttpUrlUtils.BASE_URL2).create(WanApiService.class);
     }
 
     public static Retrofit setURLRetrofit(String url) {
