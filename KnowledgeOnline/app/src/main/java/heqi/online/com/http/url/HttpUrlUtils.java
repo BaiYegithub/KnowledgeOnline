@@ -6,7 +6,7 @@ package heqi.online.com.http.url;
 
 public class HttpUrlUtils {
     //本地网络请求地址
-    public static String BASE_URL = "http://192.168.1.117:8080/online/";
+    public static String BASE_URL = "http://192.168.43.13:8080/online/";
     //wanAndroid 网址根目录
     public static String BASE_URL2 = "https://www.wanandroid.com";
 }

@@ -24,7 +24,8 @@ public class WxArticlesPresenter extends BaseAbstractPresenter<IWxArticles> {
     }
 
     public void getWxArticles(){
-        compositeDisposable.add(BaseWanApiServiceHelper.getWxArticles().subscribe(new BaseConsumer<WanBaseBean<List<WxArticlesBelongBean>>>() {
+        mView.showLoading();
+        compositeDisposable.add(BaseWanApiServiceHelper.getWxArticles().subscribe(new BaseConsumer<WanBaseBean<List<WxArticlesBelongBean>>>(mView) {
             @Override
             protected void onSuccessData(WanBaseBean<List<WxArticlesBelongBean>> result) {
                 if(result.getErrorCode()==0){//获取数据成功

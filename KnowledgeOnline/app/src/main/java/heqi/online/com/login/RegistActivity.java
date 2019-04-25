@@ -102,4 +102,10 @@ public class RegistActivity extends BaseActivity implements ILogin {
         showToast("注册成功，快去登录吧~");
         finish();
     }
+
+    //登陆成功
+    @Override
+    public void loginSuccess() {
+
+    }
 }

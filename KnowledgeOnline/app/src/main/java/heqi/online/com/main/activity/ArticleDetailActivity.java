@@ -3,6 +3,7 @@ package heqi.online.com.main.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.webkit.WebSettings;
@@ -16,9 +17,13 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import heqi.online.com.R;
 import heqi.online.com.base.BaseActivity;
+import heqi.online.com.main.bean.HomePageBean;
+import heqi.online.com.main.inter.IArticleDetail;
+import heqi.online.com.main.presenter.ArticleDetailPresenter;
+import heqi.online.com.utils.UIUtils;
 import heqi.online.com.utils.WebViewHelper;
 
-public class ArticleDetailActivity extends BaseActivity {
+public class ArticleDetailActivity extends BaseActivity implements IArticleDetail {
 
     //返回按钮
     @BindView(R.id.iv_back_titlebar)
@@ -38,7 +43,22 @@ public class ArticleDetailActivity extends BaseActivity {
     //webView
     @BindView(R.id.wb_article_acArticle)
     WebView wbArticleAcArticle;
+
+    //标题文字，默认隐藏
+    @BindView(R.id.tv_title_acArticleDetail)
+    TextView tvTitle;
+
+    //title 右侧图片
+    @BindView(R.id.iv_right_titlebar)
+    ImageView iv_right;
+
+    private boolean isCollected;//判断是否已收藏
+
+    private String aid;
+
     private String url;
+    private HomePageBean.DataBean dataBean;
+    private ArticleDetailPresenter articleDetailPresenter;
 
 
     /**
@@ -52,6 +72,13 @@ public class ArticleDetailActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+    public static void navToArticleDetailActivity(Context context, HomePageBean.DataBean databean) {
+        Intent intent = new Intent(context, ArticleDetailActivity.class);
+        intent.putExtra("dataBean", databean);
+        context.startActivity(intent);
+
+    }
+
     @Override
     protected int initContentView() {
         return R.layout.activity_article_detail;
@@ -63,12 +90,16 @@ public class ArticleDetailActivity extends BaseActivity {
         Intent intent = getIntent();
         url = intent.getStringExtra("url");
 
+        dataBean = (HomePageBean.DataBean) intent.getSerializableExtra("dataBean");
+
+
     }
 
     @Override
     protected void initViewAndData() {
 
         tvCenterTitlebar.setText("文章详情");
+        iv_right.setVisibility(View.VISIBLE);
         WebSettings wbSettings = wbArticleAcArticle.getSettings();
         wbSettings.setJavaScriptEnabled(true);
         wbSettings.setAllowFileAccess(true);
@@ -85,6 +116,11 @@ public class ArticleDetailActivity extends BaseActivity {
         if (url != null) {
             wbArticleAcArticle.loadUrl(url);
         }
+        articleDetailPresenter = new ArticleDetailPresenter(this, this);
+        if (dataBean != null) {
+
+            articleDetailPresenter.getArticleDetail(dataBean.getArticleId());
+        }
     }
 
     @Override
@@ -94,7 +130,12 @@ public class ArticleDetailActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-
+        iv_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                articleDetailPresenter.collectOrNotArticle(!isCollected,UIUtils.getUid(),aid);
+            }
+        });
     }
 
     @Override
@@ -129,5 +170,36 @@ public class ArticleDetailActivity extends BaseActivity {
     @OnClick(R.id.iv_back_titlebar)
     public void onViewClicked() {
         finish();
+    }
+
+    @Override
+    public void getArticleDetail(HomePageBean.DataBean data) {
+        aid = data.getArticleId();
+        if (data.getArticleContent().startsWith("https")) {
+            wbArticleAcArticle.loadUrl(data.getArticleContent());
+        } else {
+            tvTitle.setVisibility(View.VISIBLE);
+            tvTitle.setText(data.getTitle());
+            wbArticleAcArticle.loadData(data.getArticleContent(), "text/html", null);
+        }
+
+        if (data.getStatus() == 0) { //未收藏
+            iv_right.setImageDrawable(getResources().getDrawable(R.drawable.iv_collect));
+            isCollected = false;
+        } else {
+            iv_right.setImageDrawable(getResources().getDrawable(R.drawable.iv_collected));
+            isCollected = true;
+        }
+    }
+
+    @Override
+    public void ClickSuccess(boolean isCollect) {
+        if(isCollect){
+            iv_right.setImageDrawable(getResources().getDrawable(R.drawable.iv_collected));
+            isCollected = true;
+        }else {
+            iv_right.setImageDrawable(getResources().getDrawable(R.drawable.iv_collect));
+            isCollected = false;
+        }
     }
 }

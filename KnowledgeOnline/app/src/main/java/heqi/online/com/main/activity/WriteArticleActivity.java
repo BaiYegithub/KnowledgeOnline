@@ -16,12 +16,15 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import heqi.online.com.R;
 import heqi.online.com.base.BaseActivity;
-import heqi.online.com.utils.LogUtil;
+import heqi.online.com.main.inter.IPublishArticle;
+import heqi.online.com.main.presenter.PublishArticlePresenter;
+import heqi.online.com.utils.ConstantUtil;
+import heqi.online.com.utils.SharedPreferenceUtils;
 import heqi.online.com.utils.UIUtils;
 import heqi.online.com.view.LintDialog;
 import jp.wasabeef.richeditor.RichEditor;
 
-public class WriteArticleActivity extends BaseActivity {
+public class WriteArticleActivity extends BaseActivity implements IPublishArticle {
 
 
     @BindView(R.id.iv_back_titlebar)
@@ -97,6 +100,7 @@ public class WriteArticleActivity extends BaseActivity {
     boolean isChanged;
     boolean isBgChanged;
     private LintDialog lintDialog;
+    private PublishArticlePresenter articlePresenter;
 
     @Override
     protected int initContentView() {
@@ -128,7 +132,7 @@ public class WriteArticleActivity extends BaseActivity {
 
     @Override
     protected void initHttp() {
-
+        articlePresenter = new PublishArticlePresenter(this, this);
     }
 
     @Override
@@ -201,7 +205,7 @@ public class WriteArticleActivity extends BaseActivity {
             case R.id.tv_right_titlebar:
                 //发布按钮
                 String etText = tvPreviewAcWrite.getText().toString();
-                LogUtil.i("html", "html 文本是" + etText);
+                articlePresenter.publishArticle(etTitleAcWrite.getText().toString(),etText, (String) SharedPreferenceUtils.get(ConstantUtil.LoginAccount,""));
                 break;
             case R.id.action_undo:
                 //撤回按钮
@@ -303,5 +307,11 @@ public class WriteArticleActivity extends BaseActivity {
                 mEditor.insertTodo();
                 break;
         }
+    }
+
+    @Override
+    public void publishSuccess() {
+        showToast("发布成功");
+        finish();
     }
 }

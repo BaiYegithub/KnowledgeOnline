@@ -9,4 +9,6 @@ import heqi.online.com.base.BaseView;
 public interface ILogin extends BaseView {
     //注册成功
     void registerSuccess();
+    //登陆成功
+    void loginSuccess();
 }

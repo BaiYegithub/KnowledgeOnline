@@ -6,7 +6,10 @@ import heqi.online.com.base.BaseAbstractPresenter;
 import heqi.online.com.base.BaseBean;
 import heqi.online.com.http.network.BaseApiServiceHelper;
 import heqi.online.com.http.network.BaseConsumer;
+import heqi.online.com.login.bean.LoginBean;
 import heqi.online.com.login.inter.ILogin;
+import heqi.online.com.utils.ConstantUtil;
+import heqi.online.com.utils.SharedPreferenceUtils;
 
 /**
  * Created by Administrator on 2019/4/6.
@@ -15,18 +18,55 @@ import heqi.online.com.login.inter.ILogin;
 public class LoginPresenter extends BaseAbstractPresenter<ILogin> {
 
     public LoginPresenter(ILogin mView, LifecycleOwner lifecycleOwner) {
-        super(mView,lifecycleOwner);
+        super(mView, lifecycleOwner);
     }
 
-    public void register(String userName,String password){
-        compositeDisposable.add(BaseApiServiceHelper.register(userName,password).subscribe(new BaseConsumer<BaseBean>() {
+    /**
+     * @param userName 用户名
+     * @param password 密码
+     */
+    public void register(String userName, String password) {
+        compositeDisposable.add(BaseApiServiceHelper.register(userName, password).subscribe(new BaseConsumer<BaseBean>() {
             @Override
             protected void onSuccessData(BaseBean result) {
-                if(result.isRequestSuccess()){
+                if (result.isRequestSuccess()) {
                     mView.registerSuccess();
                 }
             }
         }));
 
     }
+
+    /**
+     * @param userName 用户名
+     * @param password 密码
+     */
+    public void login(String userName, String password) {
+        mView.showLoading();
+        compositeDisposable.add(BaseApiServiceHelper.login(userName, password).subscribe(new BaseConsumer<BaseBean<LoginBean>>(mView) {
+            @Override
+            protected void onSuccessData(BaseBean<LoginBean> result) {
+                if (result.isRequestSuccess()) {
+                    LoginBean loginBean = result.getData();
+                    //保存个人信息到sharedPreference
+                    //保存用户名
+                    SharedPreferenceUtils.put(ConstantUtil.LoginAccount, loginBean.getLoginAccount());
+                    //保存用户昵称
+                    SharedPreferenceUtils.put(ConstantUtil.NickName, loginBean.getNickName());
+                    //保存用户年龄
+                    SharedPreferenceUtils.put(ConstantUtil.Age, loginBean.getUserAge());
+                    //保存用户头像
+                    SharedPreferenceUtils.put(ConstantUtil.UserPicture, loginBean.getUserPic());
+                    //保存用户性别
+                    SharedPreferenceUtils.put(ConstantUtil.Sex, loginBean.getUserSex());
+
+                    SharedPreferenceUtils.put(ConstantUtil.isLogin,true);
+                    mView.loginSuccess();
+                }
+            }
+        }));
+
+    }
+
+
 }

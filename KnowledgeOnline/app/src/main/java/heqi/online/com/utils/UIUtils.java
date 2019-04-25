@@ -252,6 +252,10 @@ public class UIUtils {
     }
 
 
+    public static String getUid(){
+        return (String) SharedPreferenceUtils.get(ConstantUtil.LoginAccount,"");
+    }
+
     /**
      * 转换文件大小
      *

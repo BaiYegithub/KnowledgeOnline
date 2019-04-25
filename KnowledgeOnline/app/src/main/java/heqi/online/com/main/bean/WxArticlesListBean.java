@@ -171,10 +171,15 @@ public class WxArticlesListBean {
          */
 
         private String apkLink;
+        //作者
         private String author;
+
         private int chapterId;
+        //来源
         private String chapterName;
+        //是否收藏
         private boolean collect;
+
         private int courseId;
         private String desc;
         private String envelopePic;
@@ -185,9 +190,11 @@ public class WxArticlesListBean {
         private String origin;
         private String prefix;
         private String projectLink;
+        //发布时间
         private long publishTime;
         private int superChapterId;
         private String superChapterName;
+        //文章title
         private String title;
         private int type;
         private int userId;

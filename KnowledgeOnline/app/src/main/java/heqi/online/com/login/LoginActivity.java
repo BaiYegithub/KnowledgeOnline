@@ -13,8 +13,11 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import heqi.online.com.MainActivity;
 import heqi.online.com.R;
 import heqi.online.com.base.BaseActivity;
+import heqi.online.com.login.inter.ILogin;
+import heqi.online.com.login.presenter.LoginPresenter;
 import heqi.online.com.view.ClearEditText;
 import heqi.online.com.view.TitleBar;
 
@@ -22,7 +25,7 @@ import heqi.online.com.view.TitleBar;
  * Created by Administrator on 2019/4/6.
  */
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements ILogin {
     @BindView(R.id.titleBarAcLogin)
     TitleBar titleBarAcLogin;
     @BindView(R.id.et_phoneNum_acLogin)
@@ -41,6 +44,7 @@ public class LoginActivity extends BaseActivity {
     RelativeLayout rlvAcLogin;
 
     private boolean cansee;//判断密码是否可见,true为可见,false为不可见
+    private LoginPresenter loginPresenter;
 
     @Override
     protected int initContentView() {
@@ -53,11 +57,12 @@ public class LoginActivity extends BaseActivity {
         titleBarAcLogin.setMyBackGround(null);
         titleBarAcLogin.setTv_center("登录");
         titleBarAcLogin.setTv_right("新用户注册");
+
     }
 
     @Override
     protected void initHttp() {
-
+        loginPresenter = new LoginPresenter(this,this);
     }
 
     @Override
@@ -99,9 +104,22 @@ public class LoginActivity extends BaseActivity {
                 }
                 break;
             case R.id.bt_login_acLogin:
+                loginPresenter.login(etPhoneNumAcLogin.getText().toString(),etPassAcLogin.getText().toString());
                 break;
             case R.id.tv_forgetPass_acLogin:
                 break;
         }
     }
+
+    @Override
+    public void registerSuccess() {
+
+    }
+
+    @Override
+    public void loginSuccess() {
+        openActivity(MainActivity.class);
+    }
+
+
 }
