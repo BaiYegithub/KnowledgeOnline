@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -15,9 +16,11 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 import heqi.online.com.R;
 import heqi.online.com.base.BaseActivity;
 import heqi.online.com.main.bean.HomePageBean;
+import heqi.online.com.main.bean.MsgCollectBean;
 import heqi.online.com.main.inter.IArticleDetail;
 import heqi.online.com.main.presenter.ArticleDetailPresenter;
 import heqi.online.com.utils.UIUtils;
@@ -51,6 +54,12 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
     //title 右侧图片
     @BindView(R.id.iv_right_titlebar)
     ImageView iv_right;
+    //用户名称
+    @BindView(R.id.tv_author_acDetail)
+    TextView tvAuthor;
+    //确认按钮
+    @BindView(R.id.bt_confirm_acDetail)
+    Button btConfirm;
 
     private boolean isCollected;//判断是否已收藏
 
@@ -59,6 +68,7 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
     private String url;
     private HomePageBean.DataBean dataBean;
     private ArticleDetailPresenter articleDetailPresenter;
+    private boolean comeIsCollected;
 
 
     /**
@@ -91,8 +101,7 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
         url = intent.getStringExtra("url");
 
         dataBean = (HomePageBean.DataBean) intent.getSerializableExtra("dataBean");
-
-
+        
     }
 
     @Override
@@ -118,9 +127,10 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
         }
         articleDetailPresenter = new ArticleDetailPresenter(this, this);
         if (dataBean != null) {
-
             articleDetailPresenter.getArticleDetail(dataBean.getArticleId());
         }
+
+
     }
 
     @Override
@@ -133,7 +143,13 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
         iv_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                articleDetailPresenter.collectOrNotArticle(!isCollected,UIUtils.getUid(),aid);
+                articleDetailPresenter.collectOrNotArticle(!isCollected, UIUtils.getUid(), aid);
+            }
+        });
+        btConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
@@ -190,16 +206,21 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
             iv_right.setImageDrawable(getResources().getDrawable(R.drawable.iv_collected));
             isCollected = true;
         }
+
+        tvAuthor.setText("作者:" + data.getAuthor());
     }
 
     @Override
     public void ClickSuccess(boolean isCollect) {
-        if(isCollect){
+        if (isCollect) {
             iv_right.setImageDrawable(getResources().getDrawable(R.drawable.iv_collected));
             isCollected = true;
-        }else {
+            showToast("收藏成功");
+        } else {
             iv_right.setImageDrawable(getResources().getDrawable(R.drawable.iv_collect));
             isCollected = false;
+            showToast("取消收藏成功");
+            EventBus.getDefault().post(new MsgCollectBean(true));
         }
     }
 }

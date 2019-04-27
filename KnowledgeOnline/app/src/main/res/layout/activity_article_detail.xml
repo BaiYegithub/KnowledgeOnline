@@ -30,6 +30,30 @@
         android:progressDrawable="@drawable/webprogress_style"
         android:visibility="gone" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_author_acDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="作者："
+            android:textColor="@color/firstBlack"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/bt_confirm_acDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_author_acDetail"
+            android:text="关注" />
+    </RelativeLayout>
+
+
     <WebView
         android:id="@+id/wb_article_acArticle"
         android:layout_width="match_parent"

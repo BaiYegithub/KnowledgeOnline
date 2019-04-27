@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_img_course"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:id="@+id/tv_courseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_img_course"
+            android:text="课程名称"
+            android:textColor="@color/firstBlack"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_desc_course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_courseName"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/iv_img_course"
+            android:ellipsize="end"
+            android:maxLength="2"
+            android:text="打开了双方家里卡数据法律框架爱上的浪费空间卢卡斯的解放路卡缴费历史"
+            android:textColor="@color/secBlack"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_price_course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_desc_course"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/iv_img_course"
+            android:text="111元"
+            android:textColor="@color/red"
+            android:textSize="10dp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="67dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center"
+        android:layout_marginRight="-67dp"
+        android:gravity="center"
+        android:paddingRight="10dp"
+        android:text="删除"
+        android:textColor="@color/colorMainText_select"
+        android:textSize="16sp" />
+
+</LinearLayout>

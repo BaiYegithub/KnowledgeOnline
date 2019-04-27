@@ -53,7 +53,7 @@
 
 
             <RelativeLayout
-                android:id="@+id/rlv_credit_fragMine"
+                android:id="@+id/rlv_collect_fragMine"
                 style="@style/roundbg"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
@@ -66,22 +66,11 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="17dp"
-                    android:text="学分"
+                    android:text="我的收藏"
                     android:textColor="@color/firstBlack"
                     android:textSize="14sp" />
 
-                <!-- <TextView
-                     android:id="@+id/tv_credit_fragMine"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_alignParentRight="true"
-                     android:layout_centerVertical="true"
-                     android:layout_marginRight="17dp"
-                     android:text=""
-                     android:textColor="@color/orange"
-                     android:textSize="16sp"
-                     android:textStyle="bold"
-                     />-->
+
             </RelativeLayout>
 
             <LinearLayout
@@ -89,36 +78,39 @@
                 style="@style/roundbg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rlv_credit_fragMine"
+                android:layout_below="@id/rlv_collect_fragMine"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="6dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_myDownLoad_fragMine"
+                    android:id="@+id/tv_myPhoneNum_fragMine"
                     style="@style/mine_credit"
                     android:text="手机号" />
 
                 <View style="@style/xuxian" />
 
                 <TextView
-                    android:id="@+id/tv_collection_fragMine"
+                    android:id="@+id/tv_email_fragMine"
                     style="@style/mine_credit"
                     android:text="邮箱" />
 
                 <View style="@style/xuxian" />
 
                 <TextView
-                    android:id="@+id/tv_myQa_fragMine"
+                    android:id="@+id/tv_shopCart_fragMine"
                     style="@style/mine_credit"
-                    android:text="我的问答" />
+                    android:text="购物车" />
 
                 <View
                     android:id="@+id/xuXian_mySpecialty_fragMine"
-                    style="@style/xuxian"
-                    android:visibility="gone" />
+                    style="@style/xuxian" />
 
+                <TextView
+                    android:id="@+id/tv_course_fragMine"
+                    style="@style/mine_credit"
+                    android:text="推荐课程" />
             </LinearLayout>
 
             <TextView

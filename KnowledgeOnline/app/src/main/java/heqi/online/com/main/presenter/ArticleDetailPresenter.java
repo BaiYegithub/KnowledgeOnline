@@ -37,7 +37,7 @@ public class ArticleDetailPresenter extends BaseAbstractPresenter<IArticleDetail
     }
 
     /**
-     * @param collect 是否收藏
+     * @param isCollect 是否收藏
      * @param uid     用户id
      * @param aid     文章id
      */
