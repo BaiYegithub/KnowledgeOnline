@@ -3,22 +3,29 @@ package heqi.online.com.main.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import heqi.online.com.R;
 import heqi.online.com.base.BaseActivity;
+import heqi.online.com.main.adapter.CommentAdapter;
+import heqi.online.com.main.bean.CommentsBean;
 import heqi.online.com.main.bean.HomePageBean;
 import heqi.online.com.main.bean.MsgCollectBean;
 import heqi.online.com.main.inter.IArticleDetail;
@@ -60,15 +67,26 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
     //确认按钮
     @BindView(R.id.bt_confirm_acDetail)
     Button btConfirm;
+    //关注
+    @BindView(R.id.rlv_acDetail)
+    RelativeLayout rlvAcDetail;
+    //评论输入框
+    @BindView(R.id.et_comments)
+    EditText etComments;
+    @BindView(R.id.rcv_comments_acArticle)
+    RecyclerView rcvCommentsAcArticle;
 
     private boolean isCollected;//判断是否已收藏
 
     private String aid;
 
+    private String fid;
     private String url;
+
     private HomePageBean.DataBean dataBean;
     private ArticleDetailPresenter articleDetailPresenter;
-    private boolean comeIsCollected;
+    private boolean isFocus;
+    private CommentAdapter commentAdapter;
 
 
     /**
@@ -101,7 +119,7 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
         url = intent.getStringExtra("url");
 
         dataBean = (HomePageBean.DataBean) intent.getSerializableExtra("dataBean");
-        
+
     }
 
     @Override
@@ -131,6 +149,18 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
         }
 
 
+        rcvCommentsAcArticle.setLayoutManager(new LinearLayoutManager(this));
+        commentAdapter = new CommentAdapter();
+        rcvCommentsAcArticle.setAdapter(commentAdapter);
+
+        //长按事件
+        commentAdapter.setOnItemLongClick(new CommentAdapter.OnItemLongClick() {
+            @Override
+            public void OnItemLongClickListener(CommentsBean commentsBean) {
+                
+            }
+        });
+
     }
 
     @Override
@@ -146,10 +176,11 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
                 articleDetailPresenter.collectOrNotArticle(!isCollected, UIUtils.getUid(), aid);
             }
         });
+        //关注按钮的点击事件
         btConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                articleDetailPresenter.FocusUserOrNot(isFocus, fid);
             }
         });
     }
@@ -183,14 +214,10 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
     }
 
 
-    @OnClick(R.id.iv_back_titlebar)
-    public void onViewClicked() {
-        finish();
-    }
-
     @Override
     public void getArticleDetail(HomePageBean.DataBean data) {
         aid = data.getArticleId();
+        fid = data.getLoginAccount();
         if (data.getArticleContent().startsWith("https")) {
             wbArticleAcArticle.loadUrl(data.getArticleContent());
         } else {
@@ -198,6 +225,7 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
             tvTitle.setText(data.getTitle());
             wbArticleAcArticle.loadData(data.getArticleContent(), "text/html", null);
         }
+        rlvAcDetail.setVisibility(View.VISIBLE);
 
         if (data.getStatus() == 0) { //未收藏
             iv_right.setImageDrawable(getResources().getDrawable(R.drawable.iv_collect));
@@ -207,7 +235,16 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
             isCollected = true;
         }
 
+        if (data.getFocus() == 0) { //未关注
+            btConfirm.setText("未关注");
+            isFocus = false;
+        } else {//已关注
+            btConfirm.setText("已关注");
+            isFocus = true;
+        }
+
         tvAuthor.setText("作者:" + data.getAuthor());
+        articleDetailPresenter.getCommentList(aid);
     }
 
     @Override
@@ -223,4 +260,36 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
             EventBus.getDefault().post(new MsgCollectBean(true));
         }
     }
+
+    @Override
+    public void changeFocus(boolean b) {
+        //改变focus的状态
+        isFocus = b;
+        btConfirm.setText(isFocus ? "已关注" : "未关注");
+    }
+
+    @Override
+    public void insertSuccess() {
+        etComments.setText("");
+        articleDetailPresenter.getCommentList(aid);
+    }
+
+    @Override
+    public void getCommentsList(List<CommentsBean> data) {
+        commentAdapter.refreshList(data);
+    }
+
+
+    @OnClick({R.id.iv_back_titlebar, R.id.bt_commit_acArticle})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_back_titlebar:
+                finish();
+                break;
+            case R.id.bt_commit_acArticle:
+                articleDetailPresenter.insertComments(aid, etComments.getText().toString());
+                break;
+        }
+    }
+
 }

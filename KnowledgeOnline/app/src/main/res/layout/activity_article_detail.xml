@@ -4,58 +4,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:focusable="true"
     android:orientation="vertical"
     tools:context="heqi.online.com.main.activity.ArticleDetailActivity">
 
     <include layout="@layout/titlebar" />
 
-    <TextView
-        android:id="@+id/tv_title_acArticleDetail"
-        android:layout_width="wrap_content"
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title_acArticleDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="标题"
+                android:textColor="@color/firstBlack"
+                android:textSize="20sp"
+                android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/progressbar_acJiangYiPlay"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/webprogress_style"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/rlv_acDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_author_acDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="作者："
+                    android:textColor="@color/firstBlack"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/bt_confirm_acDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/tv_author_acDetail"
+                    android:text="关注" />
+            </RelativeLayout>
+
+
+            <WebView
+                android:id="@+id/wb_article_acArticle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcv_comments_acArticle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:padding="10dp"
-        android:text="标题"
-        android:textColor="@color/firstBlack"
-        android:textSize="20sp"
-        android:visibility="gone" />
+        android:layout_weight="0"
+        android:orientation="horizontal">
 
-    <ProgressBar
-        android:id="@+id/progressbar_acJiangYiPlay"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:max="100"
-        android:progress="0"
-        android:progressDrawable="@drawable/webprogress_style"
-        android:visibility="gone" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_author_acDetail"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/et_comments"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:text="作者："
-            android:textColor="@color/firstBlack"
-            android:textSize="15sp" />
+            android:layout_weight="1"
+            android:hint="欢迎写下你的评论" />
 
         <Button
-            android:id="@+id/bt_confirm_acDetail"
+            android:id="@+id/bt_commit_acArticle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/tv_author_acDetail"
-            android:text="关注" />
-    </RelativeLayout>
+            android:text="提交" />
+
+    </LinearLayout>
 
 
-    <WebView
-        android:id="@+id/wb_article_acArticle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </LinearLayout>

@@ -87,14 +87,21 @@
                 <TextView
                     android:id="@+id/tv_myPhoneNum_fragMine"
                     style="@style/mine_credit"
-                    android:text="手机号" />
+                    android:text="昵称" />
 
                 <View style="@style/xuxian" />
 
                 <TextView
                     android:id="@+id/tv_email_fragMine"
                     style="@style/mine_credit"
-                    android:text="邮箱" />
+                    android:text="年龄" />
+
+                <View style="@style/xuxian" />
+
+                <TextView
+                    android:id="@+id/tv_gender_fragMine"
+                    style="@style/mine_credit"
+                    android:text="性别" />
 
                 <View style="@style/xuxian" />
 

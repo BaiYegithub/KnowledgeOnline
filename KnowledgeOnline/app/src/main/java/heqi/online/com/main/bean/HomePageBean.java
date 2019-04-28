@@ -64,7 +64,7 @@ public class HomePageBean {
         this.data = data;
     }
 
-    public static class DataBean implements Serializable{
+    public static class DataBean implements Serializable {
         /**
          * articleId : bc4493f4304144bcbf0d58dc05078239_20190422
          * author : 羊毛
@@ -81,6 +81,24 @@ public class HomePageBean {
         private String articleContent;
         private String publishTime;
         private int status; //0是未收藏  1是收藏
+        private String loginAccount;
+        private int focus; //0是未关注  1是已关注
+
+        public int getFocus() {
+            return focus;
+        }
+
+        public void setFocus(int focus) {
+            this.focus = focus;
+        }
+
+        public String getLoginAccount() {
+            return loginAccount == null ? "" : loginAccount;
+        }
+
+        public void setLoginAccount(String loginAccount) {
+            this.loginAccount = loginAccount;
+        }
 
         public int getStatus() {
             return status;

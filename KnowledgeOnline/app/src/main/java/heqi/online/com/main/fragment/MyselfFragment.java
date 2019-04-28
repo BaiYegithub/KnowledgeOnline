@@ -9,6 +9,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import heqi.online.com.R;
 import heqi.online.com.base.BaseFragment;
+import heqi.online.com.main.activity.ChangeActivity;
 import heqi.online.com.main.activity.CourseListActivity;
 import heqi.online.com.main.activity.HeadImgSetActivity;
 import heqi.online.com.main.activity.MyCollectActivity;
@@ -79,7 +80,7 @@ public class MyselfFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.iv_head_fragMine, R.id.rlv_collect_fragMine, R.id.tv_myPhoneNum_fragMine, R.id.tv_email_fragMine, R.id.tv_shopCart_fragMine, R.id.tv_set_fragMine, R.id.tv_course_fragMine})
+    @OnClick({R.id.iv_head_fragMine, R.id.rlv_collect_fragMine, R.id.tv_myPhoneNum_fragMine, R.id.tv_email_fragMine, R.id.tv_shopCart_fragMine, R.id.tv_set_fragMine, R.id.tv_gender_fragMine, R.id.tv_course_fragMine})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_head_fragMine:
@@ -88,13 +89,22 @@ public class MyselfFragment extends BaseFragment {
             case R.id.rlv_collect_fragMine:
                 openActivity(MyCollectActivity.class);
                 break;
+            //昵称
             case R.id.tv_myPhoneNum_fragMine:
+                ChangeActivity.navToChangeActivity(getActivity(), ConstantUtil.NickName, (String) SharedPreferenceUtils.get(ConstantUtil.NickName, ""));
                 break;
+            //年龄
             case R.id.tv_email_fragMine:
+                ChangeActivity.navToChangeActivity(getActivity(), ConstantUtil.Age, (int)SharedPreferenceUtils.get(ConstantUtil.Age, 0) + "");
                 break;
             case R.id.tv_shopCart_fragMine:
+
                 break;
             case R.id.tv_set_fragMine:
+                break;
+            //性别
+            case R.id.tv_gender_fragMine:
+
                 break;
             case R.id.tv_course_fragMine:
                 openActivity(CourseListActivity.class);

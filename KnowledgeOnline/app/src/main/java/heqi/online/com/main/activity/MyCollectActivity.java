@@ -24,6 +24,7 @@ import heqi.online.com.base.BaseActivity;
 import heqi.online.com.inter.OnDeleteClickLister;
 import heqi.online.com.main.adapter.BaseRecyclerViewAdapter;
 import heqi.online.com.main.adapter.CollectAdapter;
+import heqi.online.com.main.bean.CommentsBean;
 import heqi.online.com.main.bean.HomePageBean;
 import heqi.online.com.main.bean.MsgCollectBean;
 import heqi.online.com.main.inter.IArticleDetail;
@@ -178,5 +179,20 @@ public class MyCollectActivity extends BaseActivity implements IHomePageArticle,
         dataBeanList.remove(delPosition);
         collectAdapter.notifyDataSetChanged();
         slideRecyclerView.closeMenu();
+    }
+
+    @Override
+    public void changeFocus(boolean b) {
+
+    }
+
+    @Override
+    public void insertSuccess() {
+
+    }
+
+    @Override
+    public void getCommentsList(List<CommentsBean> data) {
+
     }
 }

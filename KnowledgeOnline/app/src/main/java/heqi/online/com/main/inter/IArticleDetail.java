@@ -1,6 +1,9 @@
 package heqi.online.com.main.inter;
 
+import java.util.List;
+
 import heqi.online.com.base.BaseView;
+import heqi.online.com.main.bean.CommentsBean;
 import heqi.online.com.main.bean.HomePageBean;
 
 /**
@@ -13,4 +16,12 @@ public interface IArticleDetail extends BaseView {
 
     //操作成功
     void ClickSuccess(boolean isCollect);
+
+    //改变关注状态
+    void changeFocus(boolean b);
+
+    //插入评论成功
+    void insertSuccess();
+
+    void getCommentsList(List<CommentsBean> data);
 }

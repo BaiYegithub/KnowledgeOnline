@@ -5,7 +5,9 @@ import java.util.List;
 
 import heqi.online.com.base.BaseBean;
 import heqi.online.com.login.bean.LoginBean;
+import heqi.online.com.main.bean.CommentsBean;
 import heqi.online.com.main.bean.CourseBean;
+import heqi.online.com.main.bean.FocusBean;
 import heqi.online.com.main.bean.HomePageBean;
 import heqi.online.com.utils.UIUtils;
 import io.reactivex.Flowable;
@@ -59,7 +61,7 @@ public class BaseApiServiceHelper {
      * @return 根据文章编号查询文章内容
      */
     public static Flowable<Result<BaseBean<HomePageBean.DataBean>>> getArticleDetail(String articleId) {
-        return getFlowable(apiService.getArticleDetail(articleId,UIUtils.getUid()));
+        return getFlowable(apiService.getArticleDetail(articleId, UIUtils.getUid()));
     }
 
     /**
@@ -94,12 +96,78 @@ public class BaseApiServiceHelper {
      * @return
      */
     public static Flowable<Result<BaseBean<HomePageBean>>> getCollection(String loginAccount, int currentPage, int pageSize) {
-        return getFlowable(apiService.getCollection(loginAccount,currentPage,pageSize));
+        return getFlowable(apiService.getCollection(loginAccount, currentPage, pageSize));
     }
 
     //分页查询课程列表
-    public static Flowable<Result<BaseBean<CourseBean>>> getCourseBean(int currentPage,int pageSize){
-        return getFlowable(apiService.getCourseBean(currentPage,pageSize));
+    public static Flowable<Result<BaseBean<CourseBean>>> getCourseBean(int currentPage, int pageSize) {
+        return getFlowable(apiService.getCourseBean(currentPage, pageSize));
+    }
+
+    /**
+     * 关注用户
+     *
+     * @param uid
+     * @param fid 被关注的uid
+     * @return
+     */
+    public static Flowable<Result<BaseBean>> focusOrNotUser(boolean focus, String uid, String fid) {
+        if (focus) {
+            return getFlowable(apiService.focusUser(uid, fid));
+        } else {
+            return getFlowable(apiService.cancelFocus(uid, fid));
+        }
+    }
+
+    /**
+     * 获取关注列表
+     *
+     * @param from
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
+    public static Flowable<Result<BaseBean<FocusBean>>> getFocusList(int from, int currentPage, int pageSize) {
+        {
+            if (from == 1) {
+                return getFlowable(apiService.getFocusOn(UIUtils.getUid(), currentPage, pageSize));
+            } else {
+                return getFlowable(apiService.getFocusUser(UIUtils.getUid(), currentPage, pageSize));
+            }
+        }
+
+    }
+
+    /**
+     * 修改个人信息
+     *
+     * @param loginAccount
+     * @param nickName
+     * @param userSex
+     * @param userAge
+     * @return
+     */
+    public static Flowable<Result<BaseBean>> update(String loginAccount, String nickName, String userSex, int userAge) {
+        return getFlowable(apiService.update(loginAccount, nickName, userSex, userAge));
+    }
+
+    /**
+     * @param articleId 文章id
+     * @param content   文章内容
+     * @return
+     */
+    public static Flowable<Result<BaseBean>> insertComments(String articleId, String content) {
+        return getFlowable(apiService.insert(articleId, UIUtils.getUid(), content));
+    }
+
+    /**
+     * 获取评论列表
+     *
+     * @param articleId
+     * @return
+     */
+    public static Flowable<Result<BaseBean<List<CommentsBean>>>> getCommentsList(String articleId) {
+        return getFlowable(apiService.getCommentsList(articleId));
     }
 
 }

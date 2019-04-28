@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="heqi.online.com">
+    package="heqi.online.com">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name=".base.MyApplication"
         android:allowBackup="false"
@@ -16,29 +17,33 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".login.LoginActivity">
 
         </activity>
-        <activity android:name=".login.RegistActivity"/>
+        <activity android:name=".login.RegistActivity" />
         <activity
             android:name=".main.activity.WriteArticleActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-        </activity>
-        <activity android:name=".main.activity.ArticleDetailActivity">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+        <activity
+            android:name=".main.activity.ArticleDetailActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
 
-        <activity android:name=".main.activity.StartActivity"
+        <activity
+            android:name=".main.activity.StartActivity"
             android:theme="@style/SplashTheme">
 
         </activity>
-        <activity android:name=".main.activity.HeadImgSetActivity"/>
-        <activity android:name=".main.activity.MyCollectActivity"/>
-        <activity android:name=".main.activity.CourseListActivity"/>
+        <activity android:name=".main.activity.HeadImgSetActivity" />
+        <activity android:name=".main.activity.MyCollectActivity" />
+        <activity android:name=".main.activity.CourseListActivity" />
+        <activity android:name=".main.activity.ChangeActivity" />
+        <activity android:name=".main.activity.PersonActivity" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="heqi.online.com.fileprovider"
@@ -46,7 +51,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/filepaths"/>
+                android:resource="@xml/filepaths" />
         </provider>
     </application>
 

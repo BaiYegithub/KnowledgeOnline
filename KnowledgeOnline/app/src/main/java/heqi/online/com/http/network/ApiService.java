@@ -1,8 +1,12 @@
 package heqi.online.com.http.network;
 
+import java.util.List;
+
 import heqi.online.com.base.BaseBean;
 import heqi.online.com.login.bean.LoginBean;
+import heqi.online.com.main.bean.CommentsBean;
 import heqi.online.com.main.bean.CourseBean;
+import heqi.online.com.main.bean.FocusBean;
 import heqi.online.com.main.bean.HomePageBean;
 import io.reactivex.Flowable;
 import okhttp3.MultipartBody;
@@ -70,4 +74,38 @@ public interface ApiService {
     @FormUrlEncoded
     Flowable<Result<BaseBean<CourseBean>>> getCourseBean(@Field("currentPage") int currentPage, @Field("pageSize") int pageSize);
 
+    //关注用户
+    @POST("user/focusUser")
+    @FormUrlEncoded
+    Flowable<Result<BaseBean>> focusUser(@Field("uid") String uid, @Field("fid") String fid);
+
+    //取消关注
+    @POST("user/cancelFocus")
+    @FormUrlEncoded
+    Flowable<Result<BaseBean>> cancelFocus(@Field("uid") String uid, @Field("fid") String fid);
+
+    //查询我关注的
+    @POST("user/showFocusUsersByPageBean")
+    @FormUrlEncoded
+    Flowable<Result<BaseBean<FocusBean>>> getFocusUser(@Field("uid") String uid, @Field("currentPage") int currentPage, @Field("pageSize") int pageSize);
+
+    //查询关注我的
+    @POST("user/showUsersFocusOnByPageBean")
+    @FormUrlEncoded
+    Flowable<Result<BaseBean<FocusBean>>> getFocusOn(@Field("uid") String uid, @Field("currentPage") int currentPage, @Field("pageSize") int pageSize);
+
+    //修改用户信息
+    @POST("user/update")
+    @FormUrlEncoded
+    Flowable<Result<BaseBean>> update(@Field("loginAccount") String loginAccount, @Field("nickName") String nickName, @Field("userSex") String userSex, @Field("userAge") int userAge);
+
+    //添加评论
+    @POST("comments/insert")
+    @FormUrlEncoded
+    Flowable<Result<BaseBean>> insert(@Field("articleId") String articleId, @Field("fromUid") String fromUid, @Field("content") String content);
+
+    //查询所有文章评论
+    @POST("comments/selectAllComments")
+    @FormUrlEncoded
+    Flowable<Result<BaseBean<List<CommentsBean>>>> getCommentsList(@Field("articleId") String articleId);
 }

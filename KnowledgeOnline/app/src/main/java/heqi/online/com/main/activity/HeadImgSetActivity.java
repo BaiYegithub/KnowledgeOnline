@@ -74,9 +74,12 @@ public class HeadImgSetActivity extends BaseActivity implements IUploadImg {
     }
 
 
-    @OnClick({R.id.tv_album_acHeadImgSet, R.id.tv_take_photo_acHeadImgSet})
+    @OnClick({R.id.iv_back_titlebar,R.id.tv_album_acHeadImgSet, R.id.tv_take_photo_acHeadImgSet})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.iv_back_titlebar:
+                finish();
+                break;
             case R.id.tv_album_acHeadImgSet:
                 String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
                 if (checkPermissions(permissions)) { //判断读取权限
