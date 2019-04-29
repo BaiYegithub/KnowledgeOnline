@@ -1,5 +1,6 @@
 package heqi.online.com.main.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -62,7 +63,7 @@ public class FocusBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         /**
          * id : 0
          * uid : 15810206306

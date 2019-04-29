@@ -108,6 +108,7 @@
                 <TextView
                     android:id="@+id/tv_shopCart_fragMine"
                     style="@style/mine_credit"
+                    android:visibility="gone"
                     android:text="购物车" />
 
                 <View
@@ -117,6 +118,7 @@
                 <TextView
                     android:id="@+id/tv_course_fragMine"
                     style="@style/mine_credit"
+                    android:visibility="gone"
                     android:text="推荐课程" />
             </LinearLayout>
 
@@ -130,6 +132,7 @@
                 android:layout_marginTop="6dp"
                 android:background="@drawable/layer_list_yinying"
                 android:elevation="1dp"
+                android:visibility="gone"
                 android:paddingLeft="16dp"
                 android:paddingRight="19dp"
                 android:text="设置" />

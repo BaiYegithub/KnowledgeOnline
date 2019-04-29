@@ -55,6 +55,8 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
     private int currentPage = 1;
     private boolean canLoadMore = false;//默认不能加载更多
     private HomePagePresenter homePagePresenter;
+    private int isPerson = 0;
+    private String fid = "";
 
     @Override
     protected int getLayoutId() {
@@ -64,6 +66,14 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
     @Override
     protected void initViewAndData(View view, Bundle savedInstanceState) {
         setSystemBarPadding(getActivity(), relativeLayoutTitleBar);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            isPerson = (int) bundle.get("isPerson");
+            fid = (String) bundle.get("fid");
+        }
+
+        ivBackTitlebar.setVisibility(View.GONE);
         tvCenterTitlebar.setText("文章推荐");
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -86,7 +96,12 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
                 currentPage = 1;
-                homePagePresenter.getHomePageArticles(currentPage, 20);
+                if (isPerson == 1) {
+                    homePagePresenter.getPublishArticles(fid, currentPage, 20);
+                } else {
+                    homePagePresenter.getHomePageArticles(currentPage, 20);
+                }
+
             }
         });
         //设置上拉加载更多监听
@@ -95,7 +110,11 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
             public void onLoadMore(RefreshLayout refreshLayout) {
                 if (canLoadMore) {
                     currentPage++;
-                    homePagePresenter.getHomePageArticles(currentPage, 20);
+                    if (isPerson == 1) {
+                        homePagePresenter.getPublishArticles(fid, currentPage, 20);
+                    } else {
+                        homePagePresenter.getHomePageArticles(currentPage, 20);
+                    }
                 } else {
                     showToast("没有更多数据了");
                     refreshLayout.finishLoadMoreWithNoMoreData();
@@ -106,7 +125,7 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
         articlesAdapter.setOnItemClickListener(new ArticlesAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(HomePageBean.DataBean dataBean) {
-                ArticleDetailActivity.navToArticleDetailActivity(getActivity(),dataBean);
+                ArticleDetailActivity.navToArticleDetailActivity(getActivity(), dataBean);
             }
         });
     }

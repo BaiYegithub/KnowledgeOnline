@@ -1,5 +1,6 @@
 package heqi.online.com.main.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import butterknife.BindView;
 import heqi.online.com.R;
 import heqi.online.com.base.BaseFragment;
+import heqi.online.com.main.activity.PersonActivity;
 import heqi.online.com.main.adapter.FocusAdapter;
 import heqi.online.com.main.bean.FocusBean;
 import heqi.online.com.main.inter.IGetFocus;
@@ -85,6 +87,15 @@ public class FocousListFragment extends BaseFragment implements IGetFocus {
                 } else {
                     refreshLayout.finishLoadMoreWithNoMoreData();
                 }
+            }
+        });
+        //关注列表
+        focusAdapter.setOnItemClickListener(new FocusAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(FocusBean.DataBean dataBean) {
+                Intent intent = new Intent(getActivity(), PersonActivity.class);
+                intent.putExtra("dataBean", dataBean);
+                startActivity(intent);
             }
         });
     }

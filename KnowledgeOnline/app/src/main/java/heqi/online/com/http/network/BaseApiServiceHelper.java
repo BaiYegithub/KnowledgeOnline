@@ -57,6 +57,18 @@ public class BaseApiServiceHelper {
     }
 
     /**
+     * 根据个人查询发布的文章
+     *
+     * @param loginAccount
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
+    public static Flowable<Result<BaseBean<HomePageBean>>> getPublishArticles(String loginAccount, int currentPage, int pageSize) {
+        return getFlowable(apiService.getPublishArticles(loginAccount, currentPage, pageSize));
+    }
+
+    /**
      * @param articleId
      * @return 根据文章编号查询文章内容
      */
@@ -168,6 +180,19 @@ public class BaseApiServiceHelper {
      */
     public static Flowable<Result<BaseBean<List<CommentsBean>>>> getCommentsList(String articleId) {
         return getFlowable(apiService.getCommentsList(articleId));
+    }
+
+    /**
+     * 回复评论
+     *
+     * @return
+     */
+    public static Flowable<Result<BaseBean>> replyInsert(String commentId, String replyId, String replyType, String toUid, String content) {
+        return getFlowable(apiService.replyInsert(commentId, replyId, replyType, UIUtils.getUid(), toUid, content));
+    }
+
+    public static Flowable<Result<BaseBean>> deleteComments(String articleId, int id) {
+        return getFlowable(apiService.deleteComments(articleId, UIUtils.getUid(), id));
     }
 
 }

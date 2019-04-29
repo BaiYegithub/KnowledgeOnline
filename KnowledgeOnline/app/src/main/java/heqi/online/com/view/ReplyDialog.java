@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -25,6 +26,11 @@ public class ReplyDialog extends Dialog {
     TextView tvReply;
     @BindView(R.id.tv_del)
     TextView tvDel;
+    //回复内容输入框
+    @BindView(R.id.et_reply)
+    EditText etReply;
+
+    private OnClickListener onClickListener;
 
     public ReplyDialog(@NonNull Context context) {
         super(context, R.style.customDialog);
@@ -42,13 +48,27 @@ public class ReplyDialog extends Dialog {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_reply:
+                if (onClickListener != null) {
+                    onClickListener.onReply(etReply.getText().toString());
+                }
                 break;
             case R.id.tv_del:
+                if (onClickListener != null) {
+                    onClickListener.onDelete();
+                }
                 break;
         }
     }
 
-    public interface OnClickListener{
-
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
+
+    public interface OnClickListener {
+        void onReply(String strEt);
+
+        void onDelete();
+    }
+
+
 }

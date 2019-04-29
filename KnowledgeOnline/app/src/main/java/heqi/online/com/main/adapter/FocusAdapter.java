@@ -24,6 +24,8 @@ public class FocusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private List<FocusBean.DataBean> beanList = new ArrayList<>();
 
+    private OnItemClickListener onItemClickListener;
+
     public FocusAdapter() {
     }
 
@@ -45,10 +47,20 @@ public class FocusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
         GlideUtil.setImageTiling(itemViewHolder.ivPic, beanList.get(position).getUserPic(), R.drawable.headimg_default);
         itemViewHolder.tvName.setText(beanList.get(position).getNickName());
+        //点击事件
+        itemViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(beanList.get(position));
+                }
+            }
+        });
+
     }
 
     @Override
@@ -68,5 +80,14 @@ public class FocusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(FocusBean.DataBean dataBean);
+
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
     }
 }

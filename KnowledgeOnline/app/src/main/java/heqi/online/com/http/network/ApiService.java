@@ -44,6 +44,11 @@ public interface ApiService {
     @FormUrlEncoded
     Flowable<Result<BaseBean<HomePageBean>>> getHomeArticle(@Field("currentPage") int currentPage, @Field("pageSize") int pageSize);
 
+    //根据登陆账号查询发布的所有文章
+    @POST("article/showPublishArticlesByPageBean")
+    @FormUrlEncoded
+    Flowable<Result<BaseBean<HomePageBean>>> getPublishArticles(@Field("loginAccount") String loginAccount, @Field("currentPage") int currentPage, @Field("pageSize") int pageSize);
+
     //根据文章编号查询文章内容
     @POST("article/showArticleDetails")
     @FormUrlEncoded
@@ -108,4 +113,16 @@ public interface ApiService {
     @POST("comments/selectAllComments")
     @FormUrlEncoded
     Flowable<Result<BaseBean<List<CommentsBean>>>> getCommentsList(@Field("articleId") String articleId);
+
+    //添加回复
+    @POST("reply/insert")
+    @FormUrlEncoded
+    Flowable<Result<BaseBean>> replyInsert(@Field("commentId") String commentId, @Field("replyId") String replyId, @Field("replyType") String replyType, @Field("fromUid") String fromUid, @Field("toUid") String toUid, @Field("content") String content);
+
+    //删除评论
+    @POST("comments/delete")
+    @FormUrlEncoded
+    Flowable<Result<BaseBean>> deleteComments(@Field("articleId") String articleId, @Field("fromUid") String fromUid, @Field("id") int id);
+
+
 }

@@ -32,6 +32,7 @@ import heqi.online.com.main.inter.IArticleDetail;
 import heqi.online.com.main.presenter.ArticleDetailPresenter;
 import heqi.online.com.utils.UIUtils;
 import heqi.online.com.utils.WebViewHelper;
+import heqi.online.com.view.ReplyDialog;
 
 public class ArticleDetailActivity extends BaseActivity implements IArticleDetail {
 
@@ -87,6 +88,9 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
     private ArticleDetailPresenter articleDetailPresenter;
     private boolean isFocus;
     private CommentAdapter commentAdapter;
+    private ReplyDialog replyDialog;
+
+    private CommentsBean myCommentsBean;
 
 
     /**
@@ -119,6 +123,8 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
         url = intent.getStringExtra("url");
 
         dataBean = (HomePageBean.DataBean) intent.getSerializableExtra("dataBean");
+
+        replyDialog = new ReplyDialog(ArticleDetailActivity.this);
 
     }
 
@@ -153,13 +159,6 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
         commentAdapter = new CommentAdapter();
         rcvCommentsAcArticle.setAdapter(commentAdapter);
 
-        //长按事件
-        commentAdapter.setOnItemLongClick(new CommentAdapter.OnItemLongClick() {
-            @Override
-            public void OnItemLongClickListener(CommentsBean commentsBean) {
-                
-            }
-        });
 
     }
 
@@ -181,6 +180,29 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
             @Override
             public void onClick(View v) {
                 articleDetailPresenter.FocusUserOrNot(isFocus, fid);
+            }
+        });
+
+        //长按事件
+        commentAdapter.setOnItemLongClick(new CommentAdapter.OnItemLongClick() {
+            @Override
+            public void OnItemLongClickListener(CommentsBean commentsBean) {
+                myCommentsBean = commentsBean;
+                replyDialog.show();
+            }
+        });
+
+        replyDialog.setOnClickListener(new ReplyDialog.OnClickListener() {
+            @Override
+            public void onReply(String strEt) {
+                if (myCommentsBean != null) {
+                    articleDetailPresenter.replyInsert(myCommentsBean.getFromUid(), myCommentsBean.getFromUid(), "reply", myCommentsBean.getFromUid(), strEt);
+                }
+            }
+
+            @Override
+            public void onDelete() {
+                articleDetailPresenter.deleteComment(aid, myCommentsBean.getId());
             }
         });
     }
@@ -271,6 +293,7 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
     @Override
     public void insertSuccess() {
         etComments.setText("");
+        replyDialog.dismiss();
         articleDetailPresenter.getCommentList(aid);
     }
 

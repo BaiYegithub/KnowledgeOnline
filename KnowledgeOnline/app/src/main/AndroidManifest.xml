@@ -16,14 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".login.LoginActivity">
-
         </activity>
         <activity android:name=".login.RegistActivity" />
         <activity
@@ -43,6 +43,7 @@
         <activity android:name=".main.activity.CourseListActivity" />
         <activity android:name=".main.activity.ChangeActivity" />
         <activity android:name=".main.activity.PersonActivity" />
+        <activity android:name=".main.activity.ArticleListActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

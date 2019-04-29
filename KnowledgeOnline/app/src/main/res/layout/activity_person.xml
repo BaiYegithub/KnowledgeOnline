@@ -1,8 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     tools:context=".main.activity.PersonActivity">
 
+    <include layout="@layout/titlebar" />
+
+
+    <heqi.online.com.view.CircleImageView
+        android:id="@+id/iv_head_acPerson"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:id="@+id/tv_nickName_acPerson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="昵称:芦荟膏"
+        android:textColor="@color/firstBlack"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_age_acPerson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="年龄:20"
+        android:textColor="@color/firstBlack"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/bt_findArticle_acPerson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="ta发布的文章" />
 </LinearLayout>

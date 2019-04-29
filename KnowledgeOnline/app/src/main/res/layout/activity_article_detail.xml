@@ -11,7 +11,7 @@
 
     <include layout="@layout/titlebar" />
 
-    <android.support.v4.widget.NestedScrollView
+    <!--<android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
@@ -19,7 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical">-->
 
             <TextView
                 android:id="@+id/tv_title_acArticleDetail"
@@ -71,16 +71,17 @@
             <WebView
                 android:id="@+id/wb_article_acArticle"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rcv_comments_acArticle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
 
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+       <!-- </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>-->
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcv_comments_acArticle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

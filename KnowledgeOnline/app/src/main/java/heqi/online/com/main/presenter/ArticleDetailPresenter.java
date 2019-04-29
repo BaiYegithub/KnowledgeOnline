@@ -99,9 +99,9 @@ public class ArticleDetailPresenter extends BaseAbstractPresenter<IArticleDetail
         compositeDisposable.add(BaseApiServiceHelper.getCommentsList(articleId).subscribe(new BaseConsumer<BaseBean<List<CommentsBean>>>() {
             @Override
             protected void onSuccessData(BaseBean<List<CommentsBean>> result) {
-                if(result.isRequestSuccess()){
+                if (result.isRequestSuccess()) {
                     List<CommentsBean> data = result.getData();
-                    if(data!=null){
+                    if (data != null) {
                         mView.getCommentsList(data);
                     }
 
@@ -109,6 +109,31 @@ public class ArticleDetailPresenter extends BaseAbstractPresenter<IArticleDetail
             }
         }));
 
+    }
+
+    //回复评论
+    public void replyInsert(String commentId, String replyId, String replyType, String toUid, String content) {
+        compositeDisposable.add(BaseApiServiceHelper.replyInsert(commentId, replyId, replyType, toUid, content).subscribe(new BaseConsumer<BaseBean>() {
+            @Override
+            protected void onSuccessData(BaseBean result) {
+                if (result.isRequestSuccess()) {
+                    mView.insertSuccess();
+                }
+            }
+        }));
+
+    }
+
+    public void deleteComment(String articleId, int id) {
+
+        compositeDisposable.add(BaseApiServiceHelper.deleteComments(articleId, id).subscribe(new BaseConsumer<BaseBean>() {
+            @Override
+            protected void onSuccessData(BaseBean result) {
+                if (result.isRequestSuccess()) {
+                    mView.insertSuccess();
+                }
+            }
+        }));
     }
 
 
