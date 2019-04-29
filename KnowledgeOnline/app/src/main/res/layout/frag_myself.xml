@@ -132,10 +132,9 @@
                 android:layout_marginTop="6dp"
                 android:background="@drawable/layer_list_yinying"
                 android:elevation="1dp"
-                android:visibility="gone"
                 android:paddingLeft="16dp"
                 android:paddingRight="19dp"
-                android:text="设置" />
+                android:text="退出登录" />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

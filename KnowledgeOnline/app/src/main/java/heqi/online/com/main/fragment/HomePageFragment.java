@@ -15,12 +15,15 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
+import de.greenrobot.event.Subscribe;
 import heqi.online.com.R;
 import heqi.online.com.base.BaseFragment;
 import heqi.online.com.main.activity.ArticleDetailActivity;
 import heqi.online.com.main.activity.WriteArticleActivity;
 import heqi.online.com.main.adapter.ArticlesAdapter;
 import heqi.online.com.main.bean.HomePageBean;
+import heqi.online.com.main.bean.MsgPublishBean;
 import heqi.online.com.main.inter.IHomePageArticle;
 import heqi.online.com.main.presenter.HomePagePresenter;
 
@@ -73,6 +76,8 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
             fid = (String) bundle.get("fid");
         }
 
+        EventBus.getDefault().register(this);
+
         ivBackTitlebar.setVisibility(View.GONE);
         tvCenterTitlebar.setText("文章推荐");
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -87,6 +92,13 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
     protected void initHttp() {
         homePagePresenter = new HomePagePresenter(this, this);
 
+    }
+
+    @Subscribe
+    public void OnMsgEvent(MsgPublishBean msgPublishBean){
+        if(msgPublishBean.isChange){
+            refreshLayout.autoRefresh();
+        }
     }
 
     @Override
@@ -132,7 +144,7 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
 
     @Override
     protected void destroyResources() {
-
+        EventBus.getDefault().unregister(this);
     }
 
     @OnClick(R.id.tv_write_fragHome)

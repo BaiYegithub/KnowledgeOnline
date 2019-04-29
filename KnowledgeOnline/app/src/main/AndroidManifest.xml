@@ -19,11 +19,7 @@
 
         </activity>
         <activity android:name=".login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".login.RegistActivity" />
         <activity
@@ -36,7 +32,11 @@
         <activity
             android:name=".main.activity.StartActivity"
             android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".main.activity.HeadImgSetActivity" />
         <activity android:name=".main.activity.MyCollectActivity" />

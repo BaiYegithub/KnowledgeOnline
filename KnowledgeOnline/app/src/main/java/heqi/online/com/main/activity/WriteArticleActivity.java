@@ -14,8 +14,10 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 import heqi.online.com.R;
 import heqi.online.com.base.BaseActivity;
+import heqi.online.com.main.bean.MsgPublishBean;
 import heqi.online.com.main.inter.IPublishArticle;
 import heqi.online.com.main.presenter.PublishArticlePresenter;
 import heqi.online.com.utils.ConstantUtil;
@@ -312,6 +314,7 @@ public class WriteArticleActivity extends BaseActivity implements IPublishArticl
     @Override
     public void publishSuccess() {
         showToast("发布成功");
+        EventBus.getDefault().post(new MsgPublishBean(true));
         finish();
     }
 }

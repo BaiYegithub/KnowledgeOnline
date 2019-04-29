@@ -9,6 +9,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import heqi.online.com.R;
 import heqi.online.com.base.BaseFragment;
+import heqi.online.com.base.MyApplication;
+import heqi.online.com.login.LoginActivity;
 import heqi.online.com.main.activity.ChangeActivity;
 import heqi.online.com.main.activity.CourseListActivity;
 import heqi.online.com.main.activity.HeadImgSetActivity;
@@ -95,12 +97,16 @@ public class MyselfFragment extends BaseFragment {
                 break;
             //年龄
             case R.id.tv_email_fragMine:
-                ChangeActivity.navToChangeActivity(getActivity(), ConstantUtil.Age, (int)SharedPreferenceUtils.get(ConstantUtil.Age, 0) + "");
+                ChangeActivity.navToChangeActivity(getActivity(), ConstantUtil.Age, (int) SharedPreferenceUtils.get(ConstantUtil.Age, 0) + "");
                 break;
             case R.id.tv_shopCart_fragMine:
 
                 break;
+            //退出登录
             case R.id.tv_set_fragMine:
+                SharedPreferenceUtils.clear();
+                MyApplication.getInstance().removeAllActivity();
+                openActivity(LoginActivity.class);
                 break;
             //性别
             case R.id.tv_gender_fragMine:
