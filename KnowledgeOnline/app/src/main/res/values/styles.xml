@@ -133,4 +133,26 @@
         <item name="android:windowBackground">@drawable/start</item>
     </style>
 
+    <style name="bottomDialog">
+        <!-- 是否有边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!--是否在悬浮Activity之上  -->
+        <item name="android:windowIsFloating">true</item>
+        <!--标题  -->
+        <item name="android:windowNoTitle">true</item>
+        <!--阴影  -->
+        <item name="android:windowIsTranslucent">true</item><!--半透明-->
+        <!-- 进入和退出的动画 -->
+        <item name="android:windowAnimationStyle">@style/diawin</item>
+
+        <!-- 点外边可以消失  -->
+        <item name="android:windowCloseOnTouchOutside">true</item>
+
+    </style>
+    <!--选择头像弹出效果-->
+    <style name="diawin" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/ac_start_bottom_toup</item>
+        <item name="android:windowExitAnimation">@anim/ac_finish_top_tobottom</item>
+    </style>
+
 </resources>

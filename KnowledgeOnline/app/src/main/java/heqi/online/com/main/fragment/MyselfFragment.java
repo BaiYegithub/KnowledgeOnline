@@ -15,16 +15,19 @@ import heqi.online.com.main.activity.ChangeActivity;
 import heqi.online.com.main.activity.CourseListActivity;
 import heqi.online.com.main.activity.HeadImgSetActivity;
 import heqi.online.com.main.activity.MyCollectActivity;
+import heqi.online.com.main.inter.IUpdate;
+import heqi.online.com.main.presenter.UpdatePresenter;
 import heqi.online.com.utils.ConstantUtil;
 import heqi.online.com.utils.GlideUtil;
 import heqi.online.com.utils.SharedPreferenceUtils;
+import heqi.online.com.view.BottomDialog;
 import heqi.online.com.view.CircleImageView;
 
 /**
  * Created by Administrator on 2019/4/6.
  */
 
-public class MyselfFragment extends BaseFragment {
+public class MyselfFragment extends BaseFragment implements IUpdate {
     //头像
     @BindView(R.id.iv_head_fragMine)
     CircleImageView ivHeadFragMine;
@@ -49,7 +52,10 @@ public class MyselfFragment extends BaseFragment {
     //推荐课程
     @BindView(R.id.tv_course_fragMine)
     TextView tvCourse;
+    private BottomDialog bottomDialog;
+    private UpdatePresenter updatePresenter;
 
+    private String sex;
     @Override
     protected int getLayoutId() {
         return R.layout.frag_myself;
@@ -57,7 +63,7 @@ public class MyselfFragment extends BaseFragment {
 
     @Override
     protected void initViewAndData(View view, Bundle savedInstanceState) {
-
+        updatePresenter = new UpdatePresenter(this, this);
     }
 
     @Override
@@ -110,11 +116,34 @@ public class MyselfFragment extends BaseFragment {
                 break;
             //性别
             case R.id.tv_gender_fragMine:
+                if (bottomDialog == null) {
+                    bottomDialog = new BottomDialog(getActivity());
+                }
+                bottomDialog.show();
+                bottomDialog.SetOnTextClickListener(new BottomDialog.OnTextClickListener() {
+                    @Override
+                    public void onOneTextClickListener() {
+                        sex = "男";
+                        updatePresenter.update((String) SharedPreferenceUtils.get(ConstantUtil.NickName, ""), sex, (int) SharedPreferenceUtils.get(ConstantUtil.Age, 0));
+                    }
 
+                    @Override
+                    public void onTwoTextClickListener() {
+                        sex = "女";
+                        updatePresenter.update((String) SharedPreferenceUtils.get(ConstantUtil.NickName, ""), sex, (int) SharedPreferenceUtils.get(ConstantUtil.Age, 0));
+                    }
+                });
                 break;
             case R.id.tv_course_fragMine:
                 openActivity(CourseListActivity.class);
                 break;
         }
+    }
+
+    @Override
+    public void UpdateSuccess() {
+        showToast("修改成功");
+        SharedPreferenceUtils.put(ConstantUtil.Sex,sex);
+        bottomDialog.dismiss();
     }
 }
