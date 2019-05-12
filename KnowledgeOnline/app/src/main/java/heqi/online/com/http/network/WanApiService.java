@@ -4,6 +4,7 @@ package heqi.online.com.http.network;
 import java.util.List;
 
 import heqi.online.com.base.WanBaseBean;
+import heqi.online.com.main.bean.WanBannerBean;
 import heqi.online.com.main.bean.WxArticlesBelongBean;
 import heqi.online.com.main.bean.WxArticlesListBean;
 import io.reactivex.Flowable;
@@ -26,4 +27,8 @@ public interface WanApiService {
     //获取公众号下具体文章列表
     @GET("wxarticle/list/{chapterId}/{curPage}/json")
     Flowable<Result<WanBaseBean<WxArticlesListBean>>> getWxArticlesList(@Path("chapterId") int chapterId, @Path("curPage") int curPage);
+
+    //获取banner 图片
+    @GET("banner/json")
+    Flowable<Result<WanBaseBean<List<WanBannerBean>>>> getBannerList();
 }

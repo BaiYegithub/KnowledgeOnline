@@ -27,6 +27,7 @@ import heqi.online.com.main.adapter.CollectAdapter;
 import heqi.online.com.main.bean.CommentsBean;
 import heqi.online.com.main.bean.HomePageBean;
 import heqi.online.com.main.bean.MsgCollectBean;
+import heqi.online.com.main.bean.WanBannerBean;
 import heqi.online.com.main.inter.IArticleDetail;
 import heqi.online.com.main.inter.IHomePageArticle;
 import heqi.online.com.main.presenter.ArticleDetailPresenter;
@@ -166,6 +167,11 @@ public class MyCollectActivity extends BaseActivity implements IHomePageArticle,
         } else {
             canLoadMore = false;
         }
+
+    }
+
+    @Override
+    public void getBannerList(List<WanBannerBean> data) {
 
     }
 

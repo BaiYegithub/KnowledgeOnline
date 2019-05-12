@@ -15,4 +15,8 @@
     <color name="firstBlack">#FF333333</color>
     <color name="basic_background">#F6F6F6</color>
     <color name="secGray">#FFE1E1E1</color>
+    <color name="color_9">#999999</color>
+    <color name="color_gray">#CCCCCC</color>
+    <color name="color_3">#333333</color>
+    <color name="color_6">#666666</color>
 </resources>

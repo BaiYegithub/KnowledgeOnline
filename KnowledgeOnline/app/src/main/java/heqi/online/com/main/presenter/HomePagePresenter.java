@@ -2,11 +2,16 @@ package heqi.online.com.main.presenter;
 
 import android.arch.lifecycle.LifecycleOwner;
 
+import java.util.List;
+
 import heqi.online.com.base.BaseAbstractPresenter;
 import heqi.online.com.base.BaseBean;
+import heqi.online.com.base.WanBaseBean;
 import heqi.online.com.http.network.BaseApiServiceHelper;
 import heqi.online.com.http.network.BaseConsumer;
+import heqi.online.com.http.network.BaseWanApiServiceHelper;
 import heqi.online.com.main.bean.HomePageBean;
+import heqi.online.com.main.bean.WanBannerBean;
 import heqi.online.com.main.inter.IHomePageArticle;
 import heqi.online.com.utils.UIUtils;
 
@@ -35,8 +40,8 @@ public class HomePagePresenter extends BaseAbstractPresenter<IHomePageArticle> {
         }));
     }
 
-    public void getPublishArticles(String loginAccount,int currentPage, int pageSize) {
-        compositeDisposable.add(BaseApiServiceHelper.getPublishArticles(loginAccount,currentPage, pageSize).subscribe(new BaseConsumer<BaseBean<HomePageBean>>() {
+    public void getPublishArticles(String loginAccount, int currentPage, int pageSize) {
+        compositeDisposable.add(BaseApiServiceHelper.getPublishArticles(loginAccount, currentPage, pageSize).subscribe(new BaseConsumer<BaseBean<HomePageBean>>() {
             @Override
             protected void onSuccessData(BaseBean<HomePageBean> result) {
                 if (result.isRequestSuccess()) { //如果请求成功以后
@@ -59,6 +64,18 @@ public class HomePagePresenter extends BaseAbstractPresenter<IHomePageArticle> {
                     if (data != null) {
                         mView.getHomePageBean(data);
                     }
+                }
+            }
+        }));
+    }
+
+    //获取banner List
+    public void getBannerList() {
+        compositeDisposable.add(BaseWanApiServiceHelper.getBannerList().subscribe(new BaseConsumer<WanBaseBean<List<WanBannerBean>>>() {
+            @Override
+            protected void onSuccessData(WanBaseBean<List<WanBannerBean>> result) {
+                if (result.getData() != null) {
+                    mView.getBannerList(result.getData());
                 }
             }
         }));

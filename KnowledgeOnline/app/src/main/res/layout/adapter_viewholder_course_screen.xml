@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/item_courseScreen"
+            android:layout_width="80dp"
+            android:layout_height="42dp"
+            android:background="@drawable/selector_sliding_bg"
+            android:button="@null"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="软件工程"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"
+            android:textColor="@drawable/selector_sliding_text_color"
+            android:textSize="@dimen/textSize_eleven"
+            android:visibility="gone"
+            android:layout_marginBottom="5dp"
+            />
+
+        <TextView
+            android:id="@+id/title_courseScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:gravity="center_vertical"
+            android:text="会敌视和"
+            android:textColor="@color/color_6"
+            android:textSize="@dimen/textSize_fourteen"
+            android:layout_marginTop="10dp"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

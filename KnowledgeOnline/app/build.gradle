@@ -5,7 +5,7 @@ android {
     buildToolsVersion "28.0.0"
     defaultConfig {
         applicationId "heqi.online.com"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -47,5 +47,7 @@ dependencies {
     compile 'jp.wasabeef:richeditor-android:1.2.2'
     //EventBus 框架
     compile 'de.greenrobot:eventbus:3.0.0-beta1'
+    //Banner框架
+    compile 'com.github.pinguo-zhouwei:MZBannerView:v2.0.2'
     testCompile 'junit:junit:4.12'
 }
