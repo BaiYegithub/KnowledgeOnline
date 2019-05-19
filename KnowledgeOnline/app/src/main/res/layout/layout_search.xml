@@ -21,8 +21,10 @@
     <Button
         android:id="@+id/bt_search_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="43dp"
         android:layout_gravity="center_vertical"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_bg_search"
         android:text="搜索" />
 
 </LinearLayout>

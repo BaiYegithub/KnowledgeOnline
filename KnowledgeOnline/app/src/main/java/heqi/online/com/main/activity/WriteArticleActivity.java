@@ -24,6 +24,7 @@ import heqi.online.com.utils.ConstantUtil;
 import heqi.online.com.utils.SharedPreferenceUtils;
 import heqi.online.com.utils.UIUtils;
 import heqi.online.com.view.LintDialog;
+import heqi.online.com.view.TypeDialog;
 import jp.wasabeef.richeditor.RichEditor;
 
 public class WriteArticleActivity extends BaseActivity implements IPublishArticle {
@@ -205,9 +206,20 @@ public class WriteArticleActivity extends BaseActivity implements IPublishArticl
                 finish();
                 break;
             case R.id.tv_right_titlebar:
-                //发布按钮
-                String etText = tvPreviewAcWrite.getText().toString();
-                articlePresenter.publishArticle(etTitleAcWrite.getText().toString(),etText, (String) SharedPreferenceUtils.get(ConstantUtil.LoginAccount,""));
+
+                TypeDialog typeDialog = new TypeDialog(WriteArticleActivity.this);
+                for (int i = 0; i < 10; i++) {
+                    typeDialog.addRadioButton(i+"");
+                }
+                typeDialog.show();
+                typeDialog.setOnCommitClick(new TypeDialog.OnCommitClick() {
+                    @Override
+                    public void CommitClick() {
+                        //发布按钮
+                        String etText = tvPreviewAcWrite.getText().toString();
+                        articlePresenter.publishArticle(etTitleAcWrite.getText().toString(), etText, (String) SharedPreferenceUtils.get(ConstantUtil.LoginAccount, ""));
+                    }
+                });
                 break;
             case R.id.action_undo:
                 //撤回按钮

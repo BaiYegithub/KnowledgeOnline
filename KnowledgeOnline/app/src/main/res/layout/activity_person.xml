@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingLeft="10dp"
     tools:context=".main.activity.PersonActivity">
 
     <include layout="@layout/titlebar" />
@@ -35,7 +36,11 @@
     <Button
         android:id="@+id/bt_findArticle_acPerson"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_marginTop="10dp"
-        android:text="ta发布的文章" />
+        android:background="@drawable/shape_bg"
+        android:text="ta发布的文章"
+        android:textColor="@color/white" />
 </LinearLayout>

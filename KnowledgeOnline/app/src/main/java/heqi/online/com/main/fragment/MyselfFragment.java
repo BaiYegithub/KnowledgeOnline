@@ -13,6 +13,7 @@ import heqi.online.com.base.MyApplication;
 import heqi.online.com.login.LoginActivity;
 import heqi.online.com.main.activity.ChangeActivity;
 import heqi.online.com.main.activity.CourseListActivity;
+import heqi.online.com.main.activity.GroupActivity;
 import heqi.online.com.main.activity.HeadImgSetActivity;
 import heqi.online.com.main.activity.MyCollectActivity;
 import heqi.online.com.main.inter.IUpdate;
@@ -52,10 +53,14 @@ public class MyselfFragment extends BaseFragment implements IUpdate {
     //推荐课程
     @BindView(R.id.tv_course_fragMine)
     TextView tvCourse;
+
+    @BindView(R.id.tv_group_fragMine)
+    TextView tvGroup;
     private BottomDialog bottomDialog;
     private UpdatePresenter updatePresenter;
 
     private String sex;
+
     @Override
     protected int getLayoutId() {
         return R.layout.frag_myself;
@@ -88,7 +93,11 @@ public class MyselfFragment extends BaseFragment implements IUpdate {
 
     }
 
-    @OnClick({R.id.iv_head_fragMine, R.id.rlv_collect_fragMine, R.id.tv_myPhoneNum_fragMine, R.id.tv_email_fragMine, R.id.tv_shopCart_fragMine, R.id.tv_set_fragMine, R.id.tv_gender_fragMine, R.id.tv_course_fragMine})
+    @OnClick({R.id.iv_head_fragMine, R.id.rlv_collect_fragMine,
+            R.id.tv_myPhoneNum_fragMine, R.id.tv_email_fragMine,
+            R.id.tv_shopCart_fragMine, R.id.tv_set_fragMine,
+            R.id.tv_gender_fragMine, R.id.tv_course_fragMine,
+            R.id.tv_group_fragMine})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_head_fragMine:
@@ -137,13 +146,16 @@ public class MyselfFragment extends BaseFragment implements IUpdate {
             case R.id.tv_course_fragMine:
                 openActivity(CourseListActivity.class);
                 break;
+            case R.id.tv_group_fragMine:
+                openActivity(GroupActivity.class);
+                break;
         }
     }
 
     @Override
     public void UpdateSuccess() {
         showToast("修改成功");
-        SharedPreferenceUtils.put(ConstantUtil.Sex,sex);
+        SharedPreferenceUtils.put(ConstantUtil.Sex, sex);
         bottomDialog.dismiss();
     }
 }
