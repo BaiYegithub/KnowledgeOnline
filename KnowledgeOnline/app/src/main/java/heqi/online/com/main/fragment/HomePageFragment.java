@@ -35,6 +35,7 @@ import heqi.online.com.main.activity.SearchActivity;
 import heqi.online.com.main.activity.WriteArticleActivity;
 import heqi.online.com.main.adapter.ArticlesAdapter;
 import heqi.online.com.main.adapter.CourseSlidingAdapter;
+import heqi.online.com.main.bean.ArticleTypeBean;
 import heqi.online.com.main.bean.HomePageBean;
 import heqi.online.com.main.bean.MsgPublishBean;
 import heqi.online.com.main.bean.SlidingBean;
@@ -85,6 +86,8 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
     private int isPerson = 0;
     private String fid = "";
     private CourseSlidingAdapter courseSlidingAdapter;
+    private ArrayList<SlidingBean> list;
+    private String strType;
 
     @Override
     protected int getLayoutId() {
@@ -122,21 +125,14 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
         rcvDrawFragHomePage.setLayoutManager(new GridLayoutManager(UIUtils.getContext(), 3));
         courseSlidingAdapter = new CourseSlidingAdapter();
         rcvDrawFragHomePage.setAdapter(courseSlidingAdapter);
-        ArrayList<SlidingBean> list = new ArrayList();
-        list.add(new SlidingBean(1, 1, "123", "文章类型", false));
-        list.add(new SlidingBean(2, 2, "123", "原创", false));
-        list.add(new SlidingBean(2, 3, "123", "转载", false));
-        list.add(new SlidingBean(2, 4, "123", "技能", false));
-        list.add(new SlidingBean(2, 5, "123", "职场", false));
-        list.add(new SlidingBean(2, 6, "123", "方法论", false));
 
-        courseSlidingAdapter.setData(list);
     }
 
     @Override
     protected void initHttp() {
         homePagePresenter = new HomePagePresenter(this, this);
         homePagePresenter.getBannerList();
+        homePagePresenter.getTypes();
     }
 
     @Subscribe
@@ -156,7 +152,7 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
                 if (isPerson == 1) {
                     homePagePresenter.getPublishArticles(fid, currentPage, 20);
                 } else {
-                    homePagePresenter.getHomePageArticles(currentPage, 20);
+                    homePagePresenter.getHomePageArticles(null, strType, currentPage, 20);
                 }
 
             }
@@ -170,7 +166,7 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
                     if (isPerson == 1) {
                         homePagePresenter.getPublishArticles(fid, currentPage, 20);
                     } else {
-                        homePagePresenter.getHomePageArticles(currentPage, 20);
+                        homePagePresenter.getHomePageArticles(null, null, currentPage, 20);
                     }
                 } else {
                     showToast("没有更多数据了");
@@ -190,6 +186,29 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
             @Override
             public void onClick(View v) {
                 openActivity(SearchActivity.class);
+            }
+        });
+        drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                strType = courseSlidingAdapter.getChoiceCode();
+                strType = strType.substring(1, strType.length()-1);
+                refreshLayout.autoRefresh();
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
             }
         });
     }
@@ -229,6 +248,17 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
 
     }
 
+    @Override
+    public void getArticleTypes(List<ArticleTypeBean> data) {
+        list = new ArrayList();
+
+        list.add(new SlidingBean(1, 1, "123", "文章类型", false));
+        for (int i = 0; i < data.size(); i++) {
+            list.add(new SlidingBean(2, data.get(i).getId(), data.get(i).getTypeCode(), data.get(i).getTypeContent(), false));
+        }
+        courseSlidingAdapter.setData(list);
+    }
+
     @OnClick({R.id.bt_select_layout, R.id.tv_write_fragHome, R.id.tvReset_sliding_courseFragment, R.id.tvSure_sliding_courseFragment})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -243,7 +273,6 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
                 break;
             case R.id.tvSure_sliding_courseFragment:
                 drawerLayout.closeDrawer(Gravity.RIGHT);
-                refreshLayout.autoRefresh();
                 break;
         }
     }

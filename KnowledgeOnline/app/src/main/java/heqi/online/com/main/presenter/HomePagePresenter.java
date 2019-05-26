@@ -10,6 +10,7 @@ import heqi.online.com.base.WanBaseBean;
 import heqi.online.com.http.network.BaseApiServiceHelper;
 import heqi.online.com.http.network.BaseConsumer;
 import heqi.online.com.http.network.BaseWanApiServiceHelper;
+import heqi.online.com.main.bean.ArticleTypeBean;
 import heqi.online.com.main.bean.HomePageBean;
 import heqi.online.com.main.bean.WanBannerBean;
 import heqi.online.com.main.inter.IHomePageArticle;
@@ -25,9 +26,36 @@ public class HomePagePresenter extends BaseAbstractPresenter<IHomePageArticle> {
         super(mView, lifecycleOwner);
     }
 
+    public void getTypes() {
+
+        compositeDisposable.add(BaseApiServiceHelper.getArticleTypes().subscribe(new BaseConsumer<BaseBean<List<ArticleTypeBean>>>() {
+            @Override
+            protected void onSuccessData(BaseBean<List<ArticleTypeBean>> result) {
+                if (result.isRequestSuccess()) { //请求成功
+                    List<ArticleTypeBean> data = result.getData();
+                    mView.getArticleTypes(data);
+                }
+            }
+        }));
+    }
+
     //获取首页文章列表
-    public void getHomePageArticles(int currentPage, int pageSize) {
-        compositeDisposable.add(BaseApiServiceHelper.getHomeArticle(currentPage, pageSize).subscribe(new BaseConsumer<BaseBean<HomePageBean>>() {
+    public void getHomePageArticles(String title, String typeCodes, int currentPage, int pageSize) {
+        compositeDisposable.add(BaseApiServiceHelper.getArticles(title, typeCodes, currentPage, pageSize).subscribe(new BaseConsumer<BaseBean<HomePageBean>>() {
+            @Override
+            protected void onSuccessData(BaseBean<HomePageBean> result) {
+                if (result.isRequestSuccess()) { //如果请求成功以后
+                    HomePageBean data = result.getData();
+                    if (data != null) {
+                        mView.getHomePageBean(data);
+                    }
+                }
+            }
+        }));
+    }
+
+    public void getHomePageArticlesNoType(int currentPage, int pageSize){
+        compositeDisposable.add(BaseApiServiceHelper.getHomeArticle(currentPage,pageSize).subscribe(new BaseConsumer<BaseBean<HomePageBean>>() {
             @Override
             protected void onSuccessData(BaseBean<HomePageBean> result) {
                 if (result.isRequestSuccess()) { //如果请求成功以后

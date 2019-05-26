@@ -3,10 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".main.activity.ArticleListActivity">
 
-    <FrameLayout
-        android:id="@+id/frameLayout_acArticleList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+  <heqi.online.com.view.TitleBar
+      android:id="@+id/titlebar_acArticleList"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
+
+    <include layout="@layout/include_refresh_recyclerview"/>
 </LinearLayout>

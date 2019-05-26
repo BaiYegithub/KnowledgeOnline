@@ -4,6 +4,7 @@ import java.util.List;
 
 import heqi.online.com.base.BaseBean;
 import heqi.online.com.login.bean.LoginBean;
+import heqi.online.com.main.bean.ArticleTypeBean;
 import heqi.online.com.main.bean.CommentsBean;
 import heqi.online.com.main.bean.CourseBean;
 import heqi.online.com.main.bean.FocusBean;
@@ -13,10 +14,12 @@ import okhttp3.MultipartBody;
 import retrofit2.adapter.rxjava2.Result;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by Administrator on 2019/4/6.
@@ -32,7 +35,7 @@ public interface ApiService {
     //登陆接口
     @POST("user/login")
     @FormUrlEncoded
-    Flowable<Result<BaseBean<LoginBean>>> login(@Field("loginAccount") String loginAccount, @Field("password") String password);
+    Flowable<Result<BaseBean<LoginBean>>> login(@Field("loginAccount") String loginAccount, @Field("password") String password, @Field("SDKAppID") int SDKAppID);
 
     //发布文章
     @POST("article/publishArticle")
@@ -124,5 +127,21 @@ public interface ApiService {
     @FormUrlEncoded
     Flowable<Result<BaseBean>> deleteComments(@Field("articleId") String articleId, @Field("fromUid") String fromUid, @Field("id") int id);
 
+    //获取所有的类型
+    @GET("type/selectTypes")
+    Flowable<Result<BaseBean<List<ArticleTypeBean>>>> getArticleTypes();
+
+    //获取文章列表
+    @GET("article/selectArticlesByPageBean")
+    Flowable<Result<BaseBean<HomePageBean>>> getArticle(@Query("title") String title, @Query("typeCodes") String typeCodes, @Query("currentPage") int currentPage, @Query("pageSize") int pageSize);
+
+    @GET("article/selectArticlesByPageBean")
+    Flowable<Result<BaseBean<HomePageBean>>> getArticle(@Query("typeCodes") String typeCodes, @Query("currentPage") int currentPage, @Query("pageSize") int pageSize);
+
+    @GET("article/selectArticlesByPageBean")
+    Flowable<Result<BaseBean<HomePageBean>>> getArticleByTitle(@Query("title") String title, @Query("currentPage") int currentPage, @Query("pageSize") int pageSize);
+
+    @GET("article/selectArticlesByPageBean")
+    Flowable<Result<BaseBean<HomePageBean>>> getArticle(@Query("currentPage") int currentPage, @Query("pageSize") int pageSize);
 
 }

@@ -2,7 +2,11 @@ package heqi.online.com;
 
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.widget.RadioGroup;
+
+import com.tencent.imsdk.TIMCallBack;
+import com.tencent.imsdk.TIMManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +18,8 @@ import heqi.online.com.main.fragment.CollectionFragment;
 import heqi.online.com.main.fragment.FocousFragment;
 import heqi.online.com.main.fragment.HomePageFragment;
 import heqi.online.com.main.fragment.MyselfFragment;
+import heqi.online.com.utils.ConstantUtil;
+import heqi.online.com.utils.SharedPreferenceUtils;
 import heqi.online.com.view.MainRadioButton;
 import heqi.online.com.view.NoScrollViewPager;
 
@@ -60,7 +66,19 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initHttp() {
+        TIMManager.getInstance().login((String) SharedPreferenceUtils.get(ConstantUtil.LoginAccount,""), (String) SharedPreferenceUtils.get(ConstantUtil.UrlSig,""), new TIMCallBack() {
+            @Override
+            public void onError(int code, String desc) {
+                //错误码 code 和错误描述 desc，可用于定位请求失败原因
+                //错误码 code 列表请参见错误码表
+                Log.d("baiye", "login failed. code: " + code + " errmsg: " + desc);
+            }
 
+            @Override
+            public void onSuccess() {
+                Log.d("baiye", "login succ");
+            }
+        });
     }
 
     @Override

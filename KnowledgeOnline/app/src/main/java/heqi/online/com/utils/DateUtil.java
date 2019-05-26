@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import heqi.online.com.R;
+import heqi.online.com.base.MyApplication;
+
 /**
  * @author by
  * @date on 2018 11.9
@@ -98,5 +101,50 @@ public class DateUtil {
         ParsePosition pos = new ParsePosition(0);
         Date strtodate = formatter.parse(strDate, pos);
         return strtodate;
+    }
+
+    /**
+     * 时间转化为显示字符串
+     *
+     * @param timeStamp 单位为秒
+     */
+    public static String getTimeStr(long timeStamp){
+        if (timeStamp==0) return "";
+        Calendar inputTime = Calendar.getInstance();
+        inputTime.setTimeInMillis(timeStamp*1000);
+        Date currenTimeZone = inputTime.getTime();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        if (calendar.before(inputTime)){
+            //今天23:59在输入时间之前，解决一些时间误差，把当天时间显示到这里
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy" + MyApplication.getAppContext().getResources().getString(R.string.time_year)+"MM"+MyApplication.getAppContext().getResources().getString(R.string.time_month)+"dd"+MyApplication.getAppContext().getResources().getString(R.string.time_day));
+            return sdf.format(currenTimeZone);
+        }
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        if (calendar.before(inputTime)){
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            return sdf.format(currenTimeZone);
+        }
+        calendar.add(Calendar.DAY_OF_MONTH,-1);
+        if (calendar.before(inputTime)){
+            return MyApplication.getAppContext().getResources().getString(R.string.time_yesterday);
+        }else{
+            calendar.set(Calendar.DAY_OF_MONTH, 1);
+            calendar.set(Calendar.MONTH, Calendar.JANUARY);
+            if (calendar.before(inputTime)){
+                SimpleDateFormat sdf = new SimpleDateFormat("M"+MyApplication.getAppContext().getResources().getString(R.string.time_month)+"d"+MyApplication.getAppContext().getResources().getString(R.string.time_day));
+                return sdf.format(currenTimeZone);
+            }else{
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy" + MyApplication.getAppContext().getResources().getString(R.string.time_year)+"MM"+MyApplication.getAppContext().getResources().getString(R.string.time_month)+"dd"+MyApplication.getAppContext().getResources().getString(R.string.time_day));
+                return sdf.format(currenTimeZone);
+
+            }
+
+        }
+
     }
 }

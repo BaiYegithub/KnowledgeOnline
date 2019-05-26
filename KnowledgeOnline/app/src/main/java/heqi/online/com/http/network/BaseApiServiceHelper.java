@@ -1,14 +1,18 @@
 package heqi.online.com.http.network;
 
+import android.text.TextUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import heqi.online.com.base.BaseBean;
 import heqi.online.com.login.bean.LoginBean;
+import heqi.online.com.main.bean.ArticleTypeBean;
 import heqi.online.com.main.bean.CommentsBean;
 import heqi.online.com.main.bean.CourseBean;
 import heqi.online.com.main.bean.FocusBean;
 import heqi.online.com.main.bean.HomePageBean;
+import heqi.online.com.utils.TxyInit;
 import heqi.online.com.utils.UIUtils;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -39,7 +43,7 @@ public class BaseApiServiceHelper {
 
     //登陆功能
     public static Flowable<Result<BaseBean<LoginBean>>> login(String userName, String passWord) {
-        return getFlowable(apiService.login(userName, passWord));
+        return getFlowable(apiService.login(userName, passWord, TxyInit.SDK_APPID));
     }
 
     //发布文章功能
@@ -194,5 +198,27 @@ public class BaseApiServiceHelper {
     public static Flowable<Result<BaseBean>> deleteComments(String articleId, int id) {
         return getFlowable(apiService.deleteComments(articleId, UIUtils.getUid(), id));
     }
+
+    /*
+    * 获取所有的类型
+    * */
+    public static Flowable<Result<BaseBean<List<ArticleTypeBean>>>> getArticleTypes() {
+        return getFlowable(apiService.getArticleTypes());
+    }
+
+
+    public static Flowable<Result<BaseBean<HomePageBean>>> getArticles(String title, String typeCodes, int currentPage, int pageSize) {
+        if(TextUtils.isEmpty(title)&&!TextUtils.isEmpty(typeCodes)){
+            return getFlowable(apiService.getArticle(typeCodes,currentPage,pageSize));
+        }else if(!TextUtils.isEmpty(title)&&TextUtils.isEmpty(typeCodes)){
+            return getFlowable(apiService.getArticleByTitle(title,currentPage,pageSize));
+        }else if(TextUtils.isEmpty(title)&&TextUtils.isEmpty(typeCodes)){
+            return getFlowable(apiService.getArticle(currentPage,pageSize));
+        }else {
+            return getFlowable(apiService.getArticle(title,typeCodes,currentPage,pageSize));
+        }
+
+    }
+
 
 }

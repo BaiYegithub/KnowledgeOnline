@@ -1,6 +1,10 @@
 package heqi.online.com.login.presenter;
 
 import android.arch.lifecycle.LifecycleOwner;
+import android.util.Log;
+
+import com.tencent.imsdk.TIMCallBack;
+import com.tencent.imsdk.TIMManager;
 
 import heqi.online.com.base.BaseAbstractPresenter;
 import heqi.online.com.base.BaseBean;
@@ -60,8 +64,27 @@ public class LoginPresenter extends BaseAbstractPresenter<ILogin> {
                     //保存用户性别
                     SharedPreferenceUtils.put(ConstantUtil.Sex, loginBean.getUserSex());
 
-                    SharedPreferenceUtils.put(ConstantUtil.isLogin,true);
-                    mView.loginSuccess();
+                    SharedPreferenceUtils.put(ConstantUtil.isLogin, true);
+
+                    SharedPreferenceUtils.put(ConstantUtil.UrlSig,loginBean.getUrlSig());
+
+                    TIMManager.getInstance().login(loginBean.getLoginAccount(), loginBean.getUrlSig(), new TIMCallBack() {
+                        @Override
+                        public void onError(int code, String desc) {
+                            //错误码 code 和错误描述 desc，可用于定位请求失败原因
+                            //错误码 code 列表请参见错误码表
+                            Log.d("baiye", "login failed. code: " + code + " errmsg: " + desc);
+                            mView.showToast("现在不能聊天哦~");
+                            mView.loginSuccess();
+                        }
+
+                        @Override
+                        public void onSuccess() {
+                            Log.d("baiye", "login succ");
+                            mView.loginSuccess();
+                        }
+                    });
+
                 }
             }
         }));

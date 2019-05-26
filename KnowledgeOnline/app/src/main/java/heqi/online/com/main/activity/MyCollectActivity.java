@@ -24,6 +24,7 @@ import heqi.online.com.base.BaseActivity;
 import heqi.online.com.inter.OnDeleteClickLister;
 import heqi.online.com.main.adapter.BaseRecyclerViewAdapter;
 import heqi.online.com.main.adapter.CollectAdapter;
+import heqi.online.com.main.bean.ArticleTypeBean;
 import heqi.online.com.main.bean.CommentsBean;
 import heqi.online.com.main.bean.HomePageBean;
 import heqi.online.com.main.bean.MsgCollectBean;
@@ -172,6 +173,11 @@ public class MyCollectActivity extends BaseActivity implements IHomePageArticle,
 
     @Override
     public void getBannerList(List<WanBannerBean> data) {
+
+    }
+
+    @Override
+    public void getArticleTypes(List<ArticleTypeBean> data) {
 
     }
 

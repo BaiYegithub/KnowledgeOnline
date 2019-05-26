@@ -17,6 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import heqi.online.com.R;
+import heqi.online.com.utils.TxyInit;
 
 /**
  * Created by Administrator on 2019/4/6.
@@ -52,6 +53,7 @@ public class MyApplication extends Application{
         super.onCreate();
         instance = this;
         mContext = getApplicationContext();
+        TxyInit.initTxy();
     }
 
     public static MyApplication getInstance(){

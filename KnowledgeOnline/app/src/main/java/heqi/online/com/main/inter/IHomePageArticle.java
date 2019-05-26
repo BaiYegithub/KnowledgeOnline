@@ -3,6 +3,7 @@ package heqi.online.com.main.inter;
 import java.util.List;
 
 import heqi.online.com.base.BaseView;
+import heqi.online.com.main.bean.ArticleTypeBean;
 import heqi.online.com.main.bean.HomePageBean;
 import heqi.online.com.main.bean.WanBannerBean;
 
@@ -17,4 +18,7 @@ public interface IHomePageArticle extends BaseView {
 
     //获取banner List
     void getBannerList(List<WanBannerBean> data);
+
+    //获取文章类型
+    void getArticleTypes(List<ArticleTypeBean> data);
 }

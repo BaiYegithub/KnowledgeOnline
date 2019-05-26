@@ -7,6 +7,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".base.MyApplication"
@@ -15,8 +19,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        tools:replace="android:allowBackup"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,30 +28,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.LoginActivity">
-
-        </activity>
+        <activity android:name=".login.LoginActivity"></activity>
         <activity android:name=".login.RegistActivity" />
         <activity
             android:name=".main.activity.WriteArticleActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity
             android:name=".main.activity.ArticleDetailActivity"
-            android:windowSoftInputMode="adjustResize"></activity>
-
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".main.activity.StartActivity"
-            android:theme="@style/SplashTheme">
-
-        </activity>
+            android:theme="@style/SplashTheme"></activity>
         <activity android:name=".main.activity.HeadImgSetActivity" />
         <activity android:name=".main.activity.MyCollectActivity" />
         <activity android:name=".main.activity.CourseListActivity" />
         <activity android:name=".main.activity.ChangeActivity" />
         <activity android:name=".main.activity.PersonActivity" />
-        <activity android:name=".main.activity.ArticleListActivity"/>
-        <activity android:name=".main.activity.SearchActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".main.activity.ArticleListActivity" />
+        <activity
+            android:name=".main.activity.SearchActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".main.im.ChatActivity" />
+        <activity android:name=".main.im.ui.ImageViewActivity"/>
+        <activity android:name=".main.im.ui.ImagePreviewActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -59,10 +62,56 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
-        <service android:name=".service.TCPServerService"
-            android:exported="true"/>
-        <activity android:name=".main.activity.GroupActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <service
+            android:name=".service.TCPServerService"
+            android:exported="true" />
+
+        <activity
+            android:name=".main.activity.GroupActivity"
+            android:windowSoftInputMode="adjustPan" />
+
+        <!-- 腾讯云通信IM -->
+        <!-- 【必须】消息收发service -->
+        <service
+            android:name="com.tencent.qalsdk.service.QalService"
+            android:exported="true"
+            android:process=":QALSERVICE"></service>
+        <service
+            android:name="com.tencent.qalsdk.service.QalAssistService"
+            android:exported="false"
+            android:process=":QALSERVICE"></service>
+
+        <!-- 【必须】 离线消息广播接收器 -->
+        <receiver
+            android:name="com.tencent.qalsdk.QALBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.tencent.qalsdk.broadcast.qal" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.tencent.qalsdk.core.NetConnInfoCenter"
+            android:process=":QALSERVICE">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.TIME_SET" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+
+            <!-- ImSDK 3.0.2 后添加 -->
+            <intent-filter>
+                <action android:name="com.tencent.qalsdk.service.TASK_REMOVED" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".main.activity.ChatListActivity"></activity>
     </application>
 
 </manifest>

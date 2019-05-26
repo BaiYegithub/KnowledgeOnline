@@ -19,6 +19,27 @@ public class LoginBean {
     private String email;
     //用户昵称
     private String nickName;
+    //腾讯云userSig
+    private String urlSig;
+    //status
+    private int status;
+
+
+    public String getUrlSig() {
+        return urlSig == null ? "" : urlSig;
+    }
+
+    public void setUrlSig(String urlSig) {
+        this.urlSig = urlSig;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public String getLoginAccount() {
         return loginAccount == null ? "" : loginAccount;

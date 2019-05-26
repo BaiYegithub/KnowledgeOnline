@@ -12,8 +12,8 @@ import heqi.online.com.base.BaseFragment;
 import heqi.online.com.base.MyApplication;
 import heqi.online.com.login.LoginActivity;
 import heqi.online.com.main.activity.ChangeActivity;
+import heqi.online.com.main.activity.ChatListActivity;
 import heqi.online.com.main.activity.CourseListActivity;
-import heqi.online.com.main.activity.GroupActivity;
 import heqi.online.com.main.activity.HeadImgSetActivity;
 import heqi.online.com.main.activity.MyCollectActivity;
 import heqi.online.com.main.inter.IUpdate;
@@ -146,8 +146,9 @@ public class MyselfFragment extends BaseFragment implements IUpdate {
             case R.id.tv_course_fragMine:
                 openActivity(CourseListActivity.class);
                 break;
+            //群组功能
             case R.id.tv_group_fragMine:
-                openActivity(GroupActivity.class);
+                openActivity(ChatListActivity.class);
                 break;
         }
     }

@@ -19,5 +19,6 @@ public class ConstantUtil {
     //用户性别
     public static final String Sex = "sex";
     public static final String isLogin = "isLogin";
+    public static final String UrlSig = "urlSig";
 
 }
