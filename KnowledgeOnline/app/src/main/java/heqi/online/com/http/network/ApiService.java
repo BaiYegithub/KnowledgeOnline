@@ -40,7 +40,7 @@ public interface ApiService {
     //发布文章
     @POST("article/publishArticle")
     @FormUrlEncoded
-    Flowable<Result<BaseBean>> publishArticle(@Field("title") String title, @Field("articleContent") String articleContent, @Field("loginAccount") String loginAccount);
+    Flowable<Result<BaseBean>> publishArticle(@Field("title") String title, @Field("articleContent") String articleContent, @Field("loginAccount") String loginAccount,@Field("typeCode")String typeCode);
 
     //获取首页文章列表
     @POST("article//showAllArticlesByPageBean")

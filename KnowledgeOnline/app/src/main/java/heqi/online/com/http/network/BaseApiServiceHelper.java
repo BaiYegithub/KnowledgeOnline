@@ -47,8 +47,8 @@ public class BaseApiServiceHelper {
     }
 
     //发布文章功能
-    public static Flowable<Result<BaseBean>> publishArticle(String title, String articleContent, String loginAccount) {
-        return getFlowable(apiService.publishArticle(title, articleContent, loginAccount));
+    public static Flowable<Result<BaseBean>> publishArticle(String title, String articleContent, String loginAccount,String typeCode) {
+        return getFlowable(apiService.publishArticle(title, articleContent, loginAccount,typeCode));
     }
 
     /**

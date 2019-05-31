@@ -12,11 +12,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import heqi.online.com.R;
 import heqi.online.com.base.BaseActivity;
+import heqi.online.com.main.bean.ArticleTypeBean;
 import heqi.online.com.main.bean.MsgPublishBean;
 import heqi.online.com.main.inter.IPublishArticle;
 import heqi.online.com.main.presenter.PublishArticlePresenter;
@@ -104,6 +107,7 @@ public class WriteArticleActivity extends BaseActivity implements IPublishArticl
     boolean isBgChanged;
     private LintDialog lintDialog;
     private PublishArticlePresenter articlePresenter;
+    private List<ArticleTypeBean> list;
 
     @Override
     protected int initContentView() {
@@ -136,6 +140,7 @@ public class WriteArticleActivity extends BaseActivity implements IPublishArticl
     @Override
     protected void initHttp() {
         articlePresenter = new PublishArticlePresenter(this, this);
+        articlePresenter.getTypes();
     }
 
     @Override
@@ -208,18 +213,20 @@ public class WriteArticleActivity extends BaseActivity implements IPublishArticl
             case R.id.tv_right_titlebar:
 
                 TypeDialog typeDialog = new TypeDialog(WriteArticleActivity.this);
-                for (int i = 0; i < 10; i++) {
-                    typeDialog.addRadioButton(i+"");
+                if (list != null && list.size() > 0) {
+                    typeDialog.addCheckBox(list);
+                    typeDialog.show();
+
+
+                    typeDialog.setOnCommitClick(new TypeDialog.OnCommitClick() {
+                        @Override
+                        public void CommitClick(String typeCodes) {
+                            //发布按钮
+                            String etText = tvPreviewAcWrite.getText().toString();
+                            articlePresenter.publishArticle(etTitleAcWrite.getText().toString(), etText, (String) SharedPreferenceUtils.get(ConstantUtil.LoginAccount, ""), typeCodes);
+                        }
+                    });
                 }
-                typeDialog.show();
-                typeDialog.setOnCommitClick(new TypeDialog.OnCommitClick() {
-                    @Override
-                    public void CommitClick() {
-                        //发布按钮
-                        String etText = tvPreviewAcWrite.getText().toString();
-                        articlePresenter.publishArticle(etTitleAcWrite.getText().toString(), etText, (String) SharedPreferenceUtils.get(ConstantUtil.LoginAccount, ""));
-                    }
-                });
                 break;
             case R.id.action_undo:
                 //撤回按钮
@@ -328,5 +335,10 @@ public class WriteArticleActivity extends BaseActivity implements IPublishArticl
         showToast("发布成功");
         EventBus.getDefault().post(new MsgPublishBean(true));
         finish();
+    }
+
+    @Override
+    public void getArticleTypes(List<ArticleTypeBean> data) {
+        list = data;
     }
 }

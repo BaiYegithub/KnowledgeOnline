@@ -8,13 +8,17 @@ import android.view.LayoutInflater;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import heqi.online.com.R;
+import heqi.online.com.main.bean.ArticleTypeBean;
 
 /**
  * Created by Administrator on 2019/5/19.
@@ -22,13 +26,14 @@ import heqi.online.com.R;
 
 public class TypeDialog extends Dialog {
 
-    //radioGroup 类型选择器
-    @BindView(R.id.rg_dialog_type)
-    RadioGroup rgDialogType;
+    @BindView(R.id.ll_dialog_type)
+    LinearLayout llDialogType;
     @BindView(R.id.bt_commit_dialog_type)
     Button btCommitDialogType;
 
+    private List<CheckBox> checkBoxList = new ArrayList<>();
     private OnCommitClick onCommitClick;
+    private List<ArticleTypeBean> thisList;
 
     public TypeDialog(@NonNull Context context) {
         super(context, R.style.customDialog);
@@ -45,7 +50,18 @@ public class TypeDialog extends Dialog {
     @OnClick(R.id.bt_commit_dialog_type)
     public void onViewClicked() {
         if (onCommitClick != null) {
-            onCommitClick.CommitClick();
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < checkBoxList.size(); i++) {
+                if(checkBoxList.get(i).isChecked()){
+                    if(sb.length()>0){
+                        sb.append(",").append(thisList.get(i).getTypeCode());
+                    }else {
+                        sb.append(thisList.get(i).getTypeCode());
+                    }
+                }
+            }
+
+            onCommitClick.CommitClick(sb.toString());
         }
     }
 
@@ -54,13 +70,18 @@ public class TypeDialog extends Dialog {
         this.onCommitClick = onCommitClick;
     }
 
-    public  interface OnCommitClick {
-        void CommitClick();
+    public interface OnCommitClick {
+        void CommitClick(String typeCodes);
     }
 
-    public void addRadioButton(String s){
-        RadioButton rb = (RadioButton) LayoutInflater.from(this.getContext()).inflate(R.layout.type_rb,rgDialogType,false);
-        rb.setText(s );
-        rgDialogType.addView(rb);
+    public void addCheckBox(List<ArticleTypeBean> list) {
+        thisList = list;
+        for (int i = 0; i < list.size(); i++) {
+            CheckBox cb = (CheckBox) LayoutInflater.from(this.getContext()).inflate(R.layout.type_rb, llDialogType, false);
+            cb.setId(i);
+            cb.setText(list.get(i).getTypeContent());
+            checkBoxList.add(cb);
+            llDialogType.addView(cb);
+        }
     }
 }
