@@ -20,7 +20,6 @@ import heqi.online.com.R;
 import heqi.online.com.base.MyApplication;
 import heqi.online.com.login.LoginActivity;
 
-import static com.tencent.qalsdk.service.QalService.context;
 
 /**
  * Created by Administrator on 2019/5/26.
@@ -39,11 +38,11 @@ public class TxyInit {
         TIMUserConfig timUserConfig = new TIMUserConfig().setUserStatusListener(new TIMUserStatusListener() {
             @Override
             public void onForceOffline() {
-                Toast.makeText(context, "您的账号在其他设备登录，已被迫下线，请重新登录", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(context, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                Toast.makeText(MyApplication.getAppContext(), "您的账号在其他设备登录，已被迫下线，请重新登录", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MyApplication.getAppContext(), LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 SharedPreferenceUtils.clear();
-                context.startActivity(intent);
+                MyApplication.getAppContext().startActivity(intent);
             }
 
             @Override
