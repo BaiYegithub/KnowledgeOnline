@@ -1,7 +1,7 @@
 package heqi.online.com.base;
 
 /**
- * author : by
+ * author : heqi
  * date: 2019/4/19 0019  上午 10:45.
  * describe
  */

@@ -63,7 +63,7 @@ public class FocusBean {
         this.data = data;
     }
 
-    public static class DataBean implements Serializable{
+    public static class DataBean implements Serializable {
         /**
          * id : 0
          * uid : 15810206306
@@ -152,8 +152,8 @@ public class FocusBean {
             this.mobile = mobile;
         }
 
-        public Object getEmail() {
-            return email;
+        public String getEmail() {
+            return email == null ? "" : email;
         }
 
         public void setEmail(String email) {

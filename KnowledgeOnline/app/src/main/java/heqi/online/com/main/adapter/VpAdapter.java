@@ -7,9 +7,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 
 /**
- * author : by
+ * author : heqi
  * date: 2019/4/19 0019  上午 11:23.
- * describe
+ * describe  viewPager的适配器,上下的导航
  */
 
 public class VpAdapter extends FragmentPagerAdapter {

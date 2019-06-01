@@ -29,7 +29,7 @@ import heqi.online.com.utils.UIUtils;
 import heqi.online.com.view.LintDialog;
 import heqi.online.com.view.TypeDialog;
 import jp.wasabeef.richeditor.RichEditor;
-
+/*发布文章页面*/
 public class WriteArticleActivity extends BaseActivity implements IPublishArticle {
 
 

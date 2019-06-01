@@ -3,7 +3,7 @@ package heqi.online.com.main.bean;
 import java.util.List;
 
 /**
- * author : by
+ * author : heqi
  * date: 2019/4/19 0019  下午 2:17.
  * describe
  */

@@ -16,10 +16,7 @@ import heqi.online.com.utils.UIUtils;
 import heqi.online.com.view.LoadingDialog;
 import heqi.online.com.view.SystemBarTintManager;
 
-/**
- * Created by cyx on 2018/11/8.
- */
-
+/*附着在Activity上的视图*/
 public abstract class BaseFragment extends Fragment implements BaseView {
     protected Activity mActivity;
     private Unbinder bind;
@@ -27,6 +24,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     /**
      * 获得全局的，防止使用getActivity()为空
+     * 先附着在activity上
      *
      * @param context
      */

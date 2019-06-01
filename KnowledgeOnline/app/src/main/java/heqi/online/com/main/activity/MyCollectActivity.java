@@ -37,7 +37,7 @@ import heqi.online.com.utils.UIUtils;
 import heqi.online.com.view.SlideRecyclerView;
 
 /**
- * Created by Administrator on 2019/4/27.
+ * Created by Administrator on 2019/4/27.  我的收藏
  */
 
 public class MyCollectActivity extends BaseActivity implements IHomePageArticle, IArticleDetail {

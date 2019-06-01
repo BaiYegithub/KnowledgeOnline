@@ -19,10 +19,10 @@ import heqi.online.com.main.adapter.VpAdapter;
  */
 
 public class FocousFragment extends BaseFragment {
-    //tablayout
+    //tablayout切换控件
     @BindView(R.id.tab_fragFocus)
     TabLayout tabFragFocus;
-    //viewpager
+    //viewpager布局切换控件
     @BindView(R.id.vp_fragFocus)
     ViewPager vpFragFocus;
 

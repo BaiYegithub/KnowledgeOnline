@@ -3,9 +3,6 @@ package heqi.online.com.base;
 import heqi.online.com.utils.ConstantUtil;
 import heqi.online.com.utils.UIUtils;
 
-/**
- * Created by Administrator on 2018/1/27 0027.
- */
 
 public class BaseBean<T> {
 

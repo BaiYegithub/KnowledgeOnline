@@ -19,7 +19,7 @@ import heqi.online.com.utils.ConstantUtil;
 import heqi.online.com.utils.SharedPreferenceUtils;
 
 /**
- * Created by Administrator on 2019/4/28.
+ * Created by Administrator on 2019/4/28.  修改昵称和年龄的
  */
 
 public class ChangeActivity extends BaseActivity implements IUpdate {

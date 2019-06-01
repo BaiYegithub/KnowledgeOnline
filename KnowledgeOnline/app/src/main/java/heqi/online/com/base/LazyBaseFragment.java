@@ -5,8 +5,6 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 /**
- * Created by dasu on 2016/9/27.
- * <p>
  * Fragment基类，封装了懒加载的实现
  * <p>
  * 1、Viewpager + Fragment情况下，fragment的生命周期因Viewpager的缓存机制而失去了具体意义
@@ -14,6 +12,7 @@ import android.view.View;
  *
  * @see #onFragmentVisibleChange(boolean)
  * @see #onFragmentFirstVisible()
+ * 出现在用户眼前才加载，不出现不加载
  */
 public abstract class LazyBaseFragment extends BaseFragment {
 

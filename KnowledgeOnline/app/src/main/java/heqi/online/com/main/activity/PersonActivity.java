@@ -17,7 +17,7 @@ import heqi.online.com.utils.GlideUtil;
 import heqi.online.com.view.CircleImageView;
 
 /**
- * Created by Administrator on 2019/4/28.
+ * Created by Administrator on 2019/4/28. 用户信息详情页
  */
 
 public class PersonActivity extends BaseActivity {
@@ -40,6 +40,9 @@ public class PersonActivity extends BaseActivity {
     TextView tvAgeAcPerson;
     @BindView(R.id.bt_findArticle_acPerson)
     Button btFindArticleAcPerson;
+
+    @BindView(R.id.tv_email_acPerson)
+    TextView tvEmail;
     private FocusBean.DataBean dataBean;
 
     @Override
@@ -58,8 +61,13 @@ public class PersonActivity extends BaseActivity {
     protected void initViewAndData() {
         GlideUtil.setImageTiling(ivHeadAcPerson, dataBean.getUserPic(), R.drawable.headimg_default);
         tvCenterTitlebar.setText("个人主页");
-        tvAgeAcPerson.setText("年龄" + dataBean.getUserAge());
-        tvNickNameAcPerson.setText("昵称" + dataBean.getNickName());
+        tvAgeAcPerson.setText("年龄 : " + dataBean.getUserAge());
+        tvNickNameAcPerson.setText("昵称 : " + dataBean.getNickName());
+        if(TextUtils.isEmpty(dataBean.getEmail())){
+            tvEmail.setText("邮箱 : 暂无邮箱");
+        }else {
+            tvEmail.setText("邮箱 : "+dataBean.getEmail());
+        }
 
 
     }

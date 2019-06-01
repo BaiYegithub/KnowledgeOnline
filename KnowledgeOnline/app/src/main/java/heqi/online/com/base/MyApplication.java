@@ -21,6 +21,7 @@ import heqi.online.com.utils.TxyInit;
 
 /**
  * Created by Administrator on 2019/4/6.
+ * 程序的入口
  */
 
 public class MyApplication extends Application{
@@ -30,7 +31,7 @@ public class MyApplication extends Application{
     private List<Activity> activities = new LinkedList<>();
 
     static {
-        //设置全局的Header构建器
+        //设置全局的Header构建器,下拉刷新
         SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
             @Override
             public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
@@ -38,7 +39,7 @@ public class MyApplication extends Application{
                 return new ClassicsHeader(context);//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
             }
         });
-        //设置全局的Footer构建器
+        //设置全局的Footer构建器，上拉加载
         SmartRefreshLayout.setDefaultRefreshFooterCreator(new DefaultRefreshFooterCreator() {
             @Override
             public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {

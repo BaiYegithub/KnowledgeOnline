@@ -22,7 +22,7 @@ import heqi.online.com.utils.ConstantUtil;
 import heqi.online.com.utils.SharedPreferenceUtils;
 import heqi.online.com.view.MainRadioButton;
 import heqi.online.com.view.NoScrollViewPager;
-
+/*登录成功进入主界面，包含4个fragment，附着在activity上的视图(轻量级的碎片)*/
 public class MainActivity extends BaseActivity {
 
     //viewPager

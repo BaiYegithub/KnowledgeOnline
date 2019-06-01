@@ -11,7 +11,7 @@ import heqi.online.com.inter.OnDeleteClickLister;
 import heqi.online.com.main.bean.HomePageBean;
 
 /**
- * Created by Administrator on 2019/4/27.
+ * Created by Administrator on 2019/4/27.用来做收藏展示
  */
 
 public class CollectAdapter extends BaseRecyclerViewAdapter<HomePageBean.DataBean> {

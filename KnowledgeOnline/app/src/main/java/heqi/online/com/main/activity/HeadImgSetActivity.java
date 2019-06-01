@@ -22,7 +22,7 @@ import heqi.online.com.utils.ConstantUtil;
 import heqi.online.com.utils.GlideUtil;
 import heqi.online.com.utils.SharedPreferenceUtils;
 import heqi.online.com.utils.UIUtils;
-
+/*更改头像的activity*/
 
 public class HeadImgSetActivity extends BaseActivity implements IUploadImg {
 

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 /**
- * RecyclerView adapter基类
+ * RecyclerView adapter基类，用来做列表展示
  * <p>
  * 封装了数据集合以及ItemView的点击事件回调,同时暴露 {@link #onBindData(RecyclerViewHolder, Object, int)}
  * 用于数据与view绑定

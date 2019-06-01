@@ -1,11 +1,6 @@
 package heqi.online.com.base;
 
-/**
- * author : by
- * date: 2018/11/9 0009  上午 11:05.
- * describe
- */
-
+/*view是activity和fragment的抽象*/
 public interface BaseView<T> {
     //显示加载框
     void showLoading();

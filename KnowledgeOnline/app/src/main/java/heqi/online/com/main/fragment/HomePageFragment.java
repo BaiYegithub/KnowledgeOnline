@@ -144,6 +144,7 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
 
     @Override
     protected void initListener() {
+        //refreshLayout 控件
         //设置下拉刷新监听
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -166,7 +167,7 @@ public class HomePageFragment extends BaseFragment implements IHomePageArticle {
                     if (isPerson == 1) {
                         homePagePresenter.getPublishArticles(fid, currentPage, 20);
                     } else {
-                        homePagePresenter.getHomePageArticles(null, null, currentPage, 20);
+                        homePagePresenter.getHomePageArticles(null, strType, currentPage, 20);
                     }
                 } else {
                     showToast("没有更多数据了");

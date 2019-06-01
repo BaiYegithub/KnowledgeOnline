@@ -8,9 +8,8 @@ import android.arch.lifecycle.OnLifecycleEvent;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
- * author : by
- * date: 2018/11/9 0009  下午 2:56.
- * describe  presenter 的抽象基类
+ * author : heqi
+ * describe  使用mvp的构造模式进行项目的搭建
  */
 
 public abstract class BaseAbstractPresenter<T extends BaseView> implements BasePresenter,LifecycleObserver {
@@ -28,7 +27,7 @@ public abstract class BaseAbstractPresenter<T extends BaseView> implements BaseP
     @Override
     public void detachView() {
         if (compositeDisposable != null) { //不判断compositeDisposable 是否disposed ,因为源码里面判断过了
-            compositeDisposable.dispose();
+            compositeDisposable.dispose();//取消网络请求，防止内存泄漏
         }
         lifecycleOwner.getLifecycle().removeObserver(this);
 

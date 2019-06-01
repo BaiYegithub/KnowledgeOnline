@@ -11,7 +11,6 @@ import heqi.online.com.base.MyApplication;
 import heqi.online.com.view.GlideRoundTransform;
 
 /**
- * @author Create by cyx 2018/11/28 0028.
  *         describe:Glide框架的常规操作封装
  */
 

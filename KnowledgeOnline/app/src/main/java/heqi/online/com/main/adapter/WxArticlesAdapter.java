@@ -17,7 +17,7 @@ import heqi.online.com.main.bean.WxArticlesListBean;
 import heqi.online.com.utils.DateUtil;
 
 /**
- * author : by
+ * author : heqi
  * date: 2019/4/19 0019  下午 3:14.
  * describe  微信文章列表的适配器
  */

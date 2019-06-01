@@ -18,7 +18,7 @@ import heqi.online.com.main.inter.IWxArticles;
 import heqi.online.com.main.presenter.WxArticlesPresenter;
 
 /**
- * Created by Administrator on 2019/4/6.
+ * Created by Administrator on 2019/4/6.附着在activity的视图
  */
 
 public class CollectionFragment extends BaseFragment implements IWxArticles {

@@ -16,7 +16,7 @@ import heqi.online.com.R;
 import heqi.online.com.main.bean.HomePageBean;
 
 /**
- * author : by
+ * author : heqi
  * date: 2019/4/19 0019  下午 3:14.
  * describe  微信文章列表的适配器
  */

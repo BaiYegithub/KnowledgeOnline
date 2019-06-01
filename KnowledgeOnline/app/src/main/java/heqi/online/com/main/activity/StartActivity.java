@@ -8,7 +8,7 @@ import heqi.online.com.utils.ConstantUtil;
 import heqi.online.com.utils.SharedPreferenceUtils;
 
 /**
- * Created by Administrator on 2019/4/21.
+ * Created by Administrator on 2019/4/21.  启动也
  */
 
 public class StartActivity extends BaseActivity {

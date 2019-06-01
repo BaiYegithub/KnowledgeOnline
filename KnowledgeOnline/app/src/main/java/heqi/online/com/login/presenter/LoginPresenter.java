@@ -14,6 +14,7 @@ import heqi.online.com.login.bean.LoginBean;
 import heqi.online.com.login.inter.ILogin;
 import heqi.online.com.utils.ConstantUtil;
 import heqi.online.com.utils.SharedPreferenceUtils;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by Administrator on 2019/4/6.

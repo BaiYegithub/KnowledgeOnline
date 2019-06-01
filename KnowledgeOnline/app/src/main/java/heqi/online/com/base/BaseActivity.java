@@ -30,10 +30,7 @@ import heqi.online.com.utils.LogUtil;
 import heqi.online.com.utils.UIUtils;
 import heqi.online.com.view.LoadingDialog;
 
-/**
- * Created by cyx on 2018/11/8.
- */
-
+/*所有Activity的基类*/
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
     private Bundle savedInstanceState;
     private Unbinder unbinder;
