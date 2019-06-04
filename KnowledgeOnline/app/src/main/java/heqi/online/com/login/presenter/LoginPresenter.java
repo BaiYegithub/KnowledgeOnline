@@ -1,6 +1,7 @@
 package heqi.online.com.login.presenter;
 
 import android.arch.lifecycle.LifecycleOwner;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.tencent.imsdk.TIMCallBack;
@@ -31,6 +32,14 @@ public class LoginPresenter extends BaseAbstractPresenter<ILogin> {
      * @param password 密码
      */
     public void register(String userName, String password) {
+        if(TextUtils.isEmpty(userName)){
+            mView.showToast("用户名不能为空");
+            return;
+        }
+        if(password.length()<6){
+            mView.showToast("密码必须大于6位");
+            return;
+        }
         compositeDisposable.add(BaseApiServiceHelper.register(userName, password).subscribe(new BaseConsumer<BaseBean>() {
             @Override
             protected void onSuccessData(BaseBean result) {
@@ -47,6 +56,14 @@ public class LoginPresenter extends BaseAbstractPresenter<ILogin> {
      * @param password 密码
      */
     public void login(String userName, String password) {
+        if(TextUtils.isEmpty(userName)){
+            mView.showToast("用户名不能为空");
+            return;
+        }
+        if(password.length()<6){
+            mView.showToast("密码必须大于6位");
+            return;
+        }
         mView.showLoading();
         compositeDisposable.add(BaseApiServiceHelper.login(userName, password).subscribe(new BaseConsumer<BaseBean<LoginBean>>(mView) {
             @Override
